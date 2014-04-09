@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Todo List</string>
+    <string name="title_text">Todo List</string>
+    <string name="action_settings">Settings</string>
+    <string name="add_button">Dodaj projekt</string>
+    <string name="current_button">Bieżące projekty</string>
+    <string name="completed_button">Zakończone projekty</string>
+</resources>
