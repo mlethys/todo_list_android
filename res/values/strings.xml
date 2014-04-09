@@ -7,4 +7,7 @@
     <string name="add_button">Dodaj projekt</string>
     <string name="current_button">Bieżące projekty</string>
     <string name="completed_button">Zakończone projekty</string>
+    <string name="new_project_textfield_label">Nazwa projektu</string>
+    <string name="new_project_textfield_hint">Nazwa Twojego projektu</string>
+    <string name="new_project_add_button">Dodaj</string>
 </resources>

@@ -4,7 +4,7 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:orientation="vertical"
-    tools:context="pl.mlethys.todolist.MainActivity"
+    tools:context="pl.mlethys.todolist.view.MainActivity"
     tools:ignore="MergeRootFrame" >
     <TextView 
         android:id="@+id/title_text"
@@ -15,10 +15,24 @@
         android:layout_gravity="center"/>
     <Button 
         android:id="@+id/add_project_button"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginTop="200sp"
-        android:text="@string/add_button"/>"
+        android:layout_marginTop="100sp"
+        android:onClick="newProject"
+        android:text="@string/add_button"/>
+    <Button
+        android:id="@+id/current_projects_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="@string/current_button"/>
+    <Button
+        android:id="@+id/completed_projects_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="@string/completed_button" />
+          "
 </LinearLayout>
 

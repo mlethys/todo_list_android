@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/new_project_container"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical"
+    tools:context="pl.mlethys.todolist.M"
+    tools:ignore="MergeRootFrame" >
+    <TextView 
+        android:id="@+id/text_field_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="150sp"
+        android:layout_gravity="center"
+        android:text="@string/new_project_textfield_label"/>
+    <EditText 
+        android:id="@+id/text_field"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:hint="@string/new_project_textfield_hint"
+        android:inputType="text"/>
+    <Button
+        android:id="@+id/new_project_add_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="@string/new_project_add_button" />"
+
+      
+    
+    
+
+</LinearLayout>
