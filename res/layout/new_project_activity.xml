@@ -7,6 +7,13 @@
     android:orientation="vertical"
     tools:context="pl.mlethys.todolist.M"
     tools:ignore="MergeRootFrame" >
+    <TextView
+        android:id="@+id/new_project_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="30sp"
+        android:layout_gravity="center"
+        android:text="@string/new_project_title"/>"
     <TextView 
         android:id="@+id/text_field_label"
         android:layout_width="wrap_content"
@@ -26,6 +33,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
+        android:onClick="addProject"
         android:text="@string/new_project_add_button" />"
 
       

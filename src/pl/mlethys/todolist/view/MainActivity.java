@@ -1,10 +1,6 @@
 package pl.mlethys.todolist.view;
 
 import pl.mlethys.todolist.R;
-import pl.mlethys.todolist.R.id;
-import pl.mlethys.todolist.R.layout;
-import pl.mlethys.todolist.R.menu;
-import pl.mlethys.todolist.model.MySqliteHelper;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -14,19 +10,15 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 
 public class MainActivity extends ActionBarActivity
 {
-	private MySqliteHelper database;
+
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-		
-		database = new MySqliteHelper(this);
-		database.getWritableDatabase();
 		
 		if (savedInstanceState == null)
 		{

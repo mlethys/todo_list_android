@@ -7,6 +7,8 @@ import android.util.Log;
 
 public class MySqliteHelper extends SQLiteOpenHelper
 {
+	private final String LOG_TAG = "database";
+	
 	private final String TABLE_PROJECTS = "projects";
 	private final String TABLE_TASKS = "tasks";
 	
@@ -17,6 +19,16 @@ public class MySqliteHelper extends SQLiteOpenHelper
 	{
 		super(context, DATABASE_NAME, null, DATABASE_VERSION);
 	}
+	
+	public String getTableProjectsName()
+	{
+		return TABLE_PROJECTS;
+	}
+	
+	public String getTableTasksName()
+	{
+		return TABLE_TASKS;
+	}
 
 	@Override
 	public void onCreate(SQLiteDatabase database) 
@@ -25,19 +37,29 @@ public class MySqliteHelper extends SQLiteOpenHelper
 									+"(id integer primary key autoincrement, "
 									+"name varchar(450) not null, "
 									+"deadline date)";
-//		String createTableProjects = "create table " + TABLE_PROJECTS 
-//									+ "(id integer primary key autoincrement, "
-//									+ "name varchar(250) not null"
+		String createTableProjects = "create table " + TABLE_PROJECTS 
+									+ "(id integer primary key autoincrement, "
+									+ "name varchar(250) not null, "
+									+ "completed boolean default false, "
+									+ "task_id integer, "
+									+ "foreign key (task_id) references " + TABLE_TASKS + "(id))";
 		database.execSQL(createTableTasks);
-		Log.d("database", "sql zrobiony");
+		database.execSQL(createTableProjects);
+		Log.d(LOG_TAG, "onCreate database created");
 		
 	}
 
 	@Override
 	public void onUpgrade(SQLiteDatabase database, int oldVersion, int newVersion) 
 	{
-		// TODO Auto-generated method stub
+		String dropQuery = "drop table if exists " + TABLE_PROJECTS;
+		database.execSQL(dropQuery);
+		dropQuery = "drop table if exists " + TABLE_TASKS;
+		database.execSQL(dropQuery);
+		Log.d(LOG_TAG, "onUpgrade, tables dropped");
 		
+		this.onCreate(database);
+		Log.d(LOG_TAG, "onUpgrade, onCreate called");
 	}
 
 }
