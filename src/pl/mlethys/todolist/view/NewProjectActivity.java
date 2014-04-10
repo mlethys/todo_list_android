@@ -7,6 +7,7 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 
 public class NewProjectActivity extends Activity
 {
@@ -27,5 +28,8 @@ public class NewProjectActivity extends Activity
 	{
 		EditText projectTextField = (EditText) findViewById(R.id.text_field);
 		dbManager.add(projectTextField.getText().toString());
+		projectTextField.setText("");
+		Toast.makeText(getApplicationContext(), "Stworzono nowy projekt!", Toast.LENGTH_SHORT).show();
+		
 	}
 }

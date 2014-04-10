@@ -27,10 +27,16 @@ public class MainActivity extends ActionBarActivity
 		}
 	}
 	
-	public void newProject(View view)
+	public void goToNewProject(View view)
 	{
 		Intent newProjectIntent = new Intent(MainActivity.this, NewProjectActivity.class);
 		startActivity(newProjectIntent);
+	}
+	
+	public void goToCurrentProjects(View view)
+	{
+		Intent currentProjectsIntent = new Intent(MainActivity.this, CurrentProjectsActivity.class);
+		startActivity(currentProjectsIntent);
 	}
 
 	@Override

@@ -5,7 +5,7 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:orientation="vertical"
-    tools:context="pl.mlethys.todolist.M"
+    tools:context="pl.mlethys.todolist.view.NewProjectActivity"
     tools:ignore="MergeRootFrame" >
     <TextView
         android:id="@+id/new_project_title"

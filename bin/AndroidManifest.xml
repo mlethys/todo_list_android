@@ -26,6 +26,14 @@
             android:name="pl.mlethys.todolist.view.NewProjectActivity"
             android:label="@string/app_name" >
        	</activity>
+       	<activity
+       	    android:name="pl.mlethys.todolist.view.CurrentProjectsActivity"
+       	  	android:label="@string/app_name" >
+     	</activity>
+     	<activity 
+     	    android:name="pl.mlethys.todolist.view.ProjectDetailsActivity"
+     	    android:label="@string/app_name" >	    
+     	</activity>
     </application>
 
 </manifest>

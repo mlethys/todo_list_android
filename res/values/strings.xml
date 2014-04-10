@@ -13,4 +13,6 @@
     <string name="new_project_textfield_label">Nazwa projektu</string>
     <string name="new_project_textfield_hint">Nazwa Twojego projektu</string>
     <string name="new_project_add_button">Dodaj</string>
+    
+    <string name="current_projects_title">Bieżące projekty</string>
 </resources>

@@ -1,8 +1,11 @@
 package pl.mlethys.todolist.model;
 
 import java.sql.Date;
+import java.util.LinkedList;
+import java.util.List;
 
 import android.content.ContentValues;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
@@ -48,5 +51,26 @@ public class DatabaseManager
 		
 		database.insert(databaseHelper.getTableTasksName(), null, values);
 		database.close();
+	}
+	
+	public List<String> getCurrentProjects()
+	{
+		List<String> currentProjects = new LinkedList<String>();
+		
+		String query = "select * from projects where completed=0";
+		
+		database = databaseHelper.getWritableDatabase();
+		Cursor cursor = database.rawQuery(query, null);
+		
+		if(cursor.moveToFirst())
+		{
+			do
+			{
+				currentProjects.add(cursor.getString(0) + ". " + cursor.getString(1));
+			} while(cursor.moveToNext());
+		}
+		
+		Log.d(LOG_TAG, "getCurrentProjects, created list of projects");
+		return currentProjects;
 	}
 }
