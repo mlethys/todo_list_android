@@ -15,4 +15,6 @@
     <string name="new_project_add_button">Dodaj</string>
     
     <string name="current_projects_title">Bieżące projekty</string>
+    
+    <string name="add_task_button">Dodaj zadanie</string>
 </resources>

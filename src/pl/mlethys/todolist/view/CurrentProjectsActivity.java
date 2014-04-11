@@ -44,7 +44,7 @@ public class CurrentProjectsActivity extends Activity implements OnItemClickList
 	@Override
 	public void onItemClick(AdapterView<?> parent, View view, int position, long id) 
 	{
-		Intent projectDetailsIntent = new Intent(CurrentProjectsActivity.this, ProjectDetailsActivity.class);
+		Intent projectDetailsIntent = new Intent(CurrentProjectsActivity.this, ProjectDetailsActivity.class).putExtra("title", projectsList.get(position));
 		startActivity(projectDetailsIntent);
 	}
 }

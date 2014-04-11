@@ -1162,6 +1162,7 @@ containing a value of this type.
         public static final int abc_shareactionprovider_share_with_application=0x7f0a000b;
         public static final int action_settings=0x7f0a000f;
         public static final int add_button=0x7f0a0010;
+        public static final int add_task_button=0x7f0a0018;
         public static final int app_name=0x7f0a000d;
         public static final int completed_button=0x7f0a0012;
         public static final int current_button=0x7f0a0011;

@@ -66,7 +66,7 @@ public class DatabaseManager
 		{
 			do
 			{
-				currentProjects.add(cursor.getString(0) + ". " + cursor.getString(1));
+				currentProjects.add(cursor.getString(1));
 			} while(cursor.moveToNext());
 		}
 		
