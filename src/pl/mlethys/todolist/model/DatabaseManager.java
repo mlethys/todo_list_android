@@ -1,9 +1,11 @@
 package pl.mlethys.todolist.model;
 
 import java.sql.Date;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.LinkedList;
 import java.util.List;
-
+import android.annotation.SuppressLint;
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -69,8 +71,45 @@ public class DatabaseManager
 				currentProjects.add(cursor.getString(1));
 			} while(cursor.moveToNext());
 		}
-		
+		database.close();
 		Log.d(LOG_TAG, "getCurrentProjects, created list of projects");
 		return currentProjects;
 	}
+	
+	@SuppressLint("SimpleDateFormat")
+	public List<Task> getTasks(int projectId) throws ParseException
+	{
+		List<Task> tasks = new LinkedList<Task>();
+		String query = "select * from tasks where project_id=" + projectId;
+		
+		database = databaseHelper.getWritableDatabase();
+		Cursor cursor = database.rawQuery(query, null);
+		if(cursor.moveToFirst())
+		{
+			do
+			{
+				SimpleDateFormat simpleDate = new SimpleDateFormat("yyyy/MM/dd");
+				
+				Task task = new Task(cursor.getString(1), simpleDate.parse(cursor.getString(2)));
+				tasks.add(task);
+			}while(cursor.moveToNext());
+		}
+		database.close();		
+		return tasks;
+	}
+	
+	public int getProjectId(String name)
+	{
+		String query = "select id from projects where name=" + name;
+		database = databaseHelper.getWritableDatabase();
+		Cursor cursor = database.rawQuery(query, null);
+		if(cursor.moveToFirst())
+		{
+			do
+			{
+				return cursor.getInt(0);
+			}while(cursor.moveToNext());
+		}
+		return 0;
+	}	
 }

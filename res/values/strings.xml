@@ -16,5 +16,10 @@
     
     <string name="current_projects_title">Bieżące projekty</string>
     
-    <string name="add_task_button">Dodaj zadanie</string>
+    <string name="add_task_button">Dodaj</string>
+    
+    <string name="dialog_confirm_button">OK</string>
+    
+    <string name="date_format_error_title">Błąd przetwarzania daty</string>
+    <string name="date_format_error_msg">Wystąpił błąd podczas przetwarzania daty</string>
 </resources>
