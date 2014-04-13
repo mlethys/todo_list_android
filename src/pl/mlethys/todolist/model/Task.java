@@ -8,6 +8,11 @@ public class Task
 	private String name;
 	private Date deadline;
 	
+	public Task(String name)
+	{
+		this.name = name;
+	}
+	
 	public Task(String name, Date deadline)
 	{
 		this.name = name;

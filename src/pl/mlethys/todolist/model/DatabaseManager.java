@@ -1,10 +1,11 @@
 package pl.mlethys.todolist.model;
 
-import java.sql.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
+
 import android.annotation.SuppressLint;
 import android.content.ContentValues;
 import android.database.Cursor;
@@ -38,18 +39,19 @@ public class DatabaseManager
 		database.close();
 	}
 	
-	public void add(String taskName, Date date)
+	public void add(String taskName, Date tmpDate, int projectId)
 	{
 		Log.d(LOG_TAG, "addTask is called");
 		
 		String columnNameKey = "name";
-		String columnDateKey = "date";
+		String columnDateKey = "deadline";
+		String columnProjectIdKey = "project_id";
 		
 		database = databaseHelper.getWritableDatabase();
-		
 		ContentValues values = new ContentValues();
 		values.put(columnNameKey, taskName);
-		values.put(columnDateKey, date.toString());
+		values.put(columnDateKey, tmpDate.toString());
+		values.put(columnProjectIdKey, projectId);
 		
 		database.insert(databaseHelper.getTableTasksName(), null, values);
 		database.close();
@@ -57,6 +59,7 @@ public class DatabaseManager
 	
 	public List<String> getCurrentProjects()
 	{
+		Log.d(LOG_TAG, "getCurrentProjects is called");
 		List<String> currentProjects = new LinkedList<String>();
 		
 		String query = "select * from projects where completed=0";
@@ -79,6 +82,7 @@ public class DatabaseManager
 	@SuppressLint("SimpleDateFormat")
 	public List<Task> getTasks(int projectId) throws ParseException
 	{
+		Log.d(LOG_TAG, "getTasks is called");
 		List<Task> tasks = new LinkedList<Task>();
 		String query = "select * from tasks where project_id=" + projectId;
 		
@@ -88,19 +92,21 @@ public class DatabaseManager
 		{
 			do
 			{
-				SimpleDateFormat simpleDate = new SimpleDateFormat("yyyy/MM/dd");
-				
-				Task task = new Task(cursor.getString(1), simpleDate.parse(cursor.getString(2)));
+				SimpleDateFormat simpleDate = new SimpleDateFormat("yyyy-MM-dd");
+				Log.d(LOG_TAG, "getTasks, simpleDate created");
+				Task task = new Task(cursor.getString(1), new Date(cursor.getLong(2)));
 				tasks.add(task);
 			}while(cursor.moveToNext());
 		}
-		database.close();		
+		database.close();
+		Log.d(LOG_TAG, "getTasks ended");
 		return tasks;
 	}
 	
 	public int getProjectId(String name)
 	{
-		String query = "select id from projects where name=" + name;
+		Log.d(LOG_TAG, "getProjectId is called");
+		String query = "select id from projects where name=" + "'" + name + "'";
 		database = databaseHelper.getWritableDatabase();
 		Cursor cursor = database.rawQuery(query, null);
 		if(cursor.moveToFirst())
@@ -110,6 +116,7 @@ public class DatabaseManager
 				return cursor.getInt(0);
 			}while(cursor.moveToNext());
 		}
-		return 0;
-	}	
+		database.close();
+		return -1;
+	}
 }
