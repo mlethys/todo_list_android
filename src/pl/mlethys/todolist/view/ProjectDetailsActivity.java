@@ -87,7 +87,7 @@ public class ProjectDetailsActivity extends Activity
 				{
 					tmpDate = dateFormat.parse("2014-01-12");
 					dbManager.add(taskNameEditText.getText().toString(), tmpDate, dbManager.getProjectId(title));
-					Toast.makeText(ProjectDetailsActivity.this, tmpDate.toString(), Toast.LENGTH_SHORT).show();
+					Toast.makeText(ProjectDetailsActivity.this, dateFormat.format(tmpDate), Toast.LENGTH_SHORT).show();
 				} 
 				catch (ParseException e)
 				{
@@ -145,6 +145,7 @@ public class ProjectDetailsActivity extends Activity
 	private void setTasks()
 	{
 		Log.d(LOG_TAG, "setTasks is called");
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 		try
 		{	
 			for(Task task : dbManager.getTasks(dbManager.getProjectId(title)))
@@ -156,7 +157,7 @@ public class ProjectDetailsActivity extends Activity
 				taskName.append(task.getName());
 				layout.addView(taskName, params);
 				TextView taskDeadline = new TextView(this);
-				taskDeadline.append(task.getDeadline().toString());
+				taskDeadline.append(dateFormat.format(task.getDeadline()));
 				layout.addView(taskDeadline, params);
 				childLayout.addView(layout);
 			}
