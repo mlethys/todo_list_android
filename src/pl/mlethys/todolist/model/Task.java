@@ -1,19 +1,20 @@
 package pl.mlethys.todolist.model;
 
-import java.util.Date;
+import org.joda.time.LocalDate;
+
 
 
 public class Task
 {
 	private String name;
-	private Date deadline;
+	private LocalDate deadline;
 	
 	public Task(String name)
 	{
 		this.name = name;
 	}
 	
-	public Task(String name, Date deadline)
+	public Task(String name, LocalDate deadline)
 	{
 		this.name = name;
 		this.deadline = deadline;
@@ -25,7 +26,7 @@ public class Task
 		return name;
 	}
 	
-	public Date getDeadline()
+	public LocalDate getDeadline()
 	{
 		return deadline;
 	}

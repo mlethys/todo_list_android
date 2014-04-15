@@ -6,6 +6,8 @@ import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 
+import org.joda.time.LocalDate;
+
 import android.annotation.SuppressLint;
 import android.content.ContentValues;
 import android.database.Cursor;
@@ -39,7 +41,7 @@ public class DatabaseManager
 		database.close();
 	}
 	
-	public void add(String taskName, Date tmpDate, int projectId)
+	public void add(String taskName, LocalDate tmpDate, int projectId)
 	{
 		Log.d(LOG_TAG, "addTask is called");
 		
@@ -92,9 +94,8 @@ public class DatabaseManager
 		{
 			do
 			{
-				SimpleDateFormat simpleDate = new SimpleDateFormat("yyyy-MM-dd");
 				Log.d(LOG_TAG, "getTasks, simpleDate created");
-				Task task = new Task(cursor.getString(1), new Date(cursor.getLong(2)));
+				Task task = new Task(cursor.getString(1), new LocalDate(cursor.getString(2)));
 				tasks.add(task);
 			}while(cursor.moveToNext());
 		}

@@ -2,7 +2,8 @@ package pl.mlethys.todolist.view;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
+
+import org.joda.time.LocalDate;
 
 import pl.mlethys.todolist.R;
 import pl.mlethys.todolist.model.DatabaseManager;
@@ -81,22 +82,10 @@ public class ProjectDetailsActivity extends Activity
 			public void onClick(View v) 
 			{	
 				DatePicker tmpDatePicker = (DatePicker) dateDialog.findViewById(R.id.date_picker);
-				SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-				Date tmpDate;
-				try
-				{
-					tmpDate = dateFormat.parse("2014-01-12");
-					dbManager.add(taskNameEditText.getText().toString(), tmpDate, dbManager.getProjectId(title));
-					Toast.makeText(ProjectDetailsActivity.this, dateFormat.format(tmpDate), Toast.LENGTH_SHORT).show();
-				} 
-				catch (ParseException e)
-				{
-					AlertDialog.Builder alert = new AlertDialog.Builder(ProjectDetailsActivity.this);
-					alert.setTitle(R.string.date_format_error_title);
-					alert.setMessage(R.string.date_format_error_msg);
-					alert.show();
-					e.printStackTrace();
-				}
+				LocalDate tmpDate = new LocalDate("2014-01-12");
+				dbManager.add(taskNameEditText.getText().toString(), tmpDate, dbManager.getProjectId(title));
+				Toast.makeText(ProjectDetailsActivity.this, tmpDate.toString(), Toast.LENGTH_SHORT).show();
+		
 				finish();
 				startActivity(getIntent());
 				
@@ -145,7 +134,6 @@ public class ProjectDetailsActivity extends Activity
 	private void setTasks()
 	{
 		Log.d(LOG_TAG, "setTasks is called");
-		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 		try
 		{	
 			for(Task task : dbManager.getTasks(dbManager.getProjectId(title)))
@@ -157,7 +145,7 @@ public class ProjectDetailsActivity extends Activity
 				taskName.append(task.getName());
 				layout.addView(taskName, params);
 				TextView taskDeadline = new TextView(this);
-				taskDeadline.append(dateFormat.format(task.getDeadline()));
+				taskDeadline.append(task.getDeadline().toString());
 				layout.addView(taskDeadline, params);
 				childLayout.addView(layout);
 			}
