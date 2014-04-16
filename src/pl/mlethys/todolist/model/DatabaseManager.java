@@ -43,7 +43,7 @@ public class DatabaseManager
 	
 	public void add(String taskName, LocalDate tmpDate, int projectId)
 	{
-		Log.d(LOG_TAG, "addTask is called");
+		Log.d(LOG_TAG, "addTask is called with date");
 		
 		String columnNameKey = "name";
 		String columnDateKey = "deadline";
@@ -53,6 +53,22 @@ public class DatabaseManager
 		ContentValues values = new ContentValues();
 		values.put(columnNameKey, taskName);
 		values.put(columnDateKey, tmpDate.toString());
+		values.put(columnProjectIdKey, projectId);
+		
+		database.insert(databaseHelper.getTableTasksName(), null, values);
+		database.close();
+	}
+	
+	public void add(String taskName, int projectId)
+	{
+		Log.d(LOG_TAG, "addTask is called without date");
+		
+		String columnNameKey = "name";
+		String columnProjectIdKey = "project_id";
+		
+		database = databaseHelper.getWritableDatabase();
+		ContentValues values = new ContentValues();
+		values.put(columnNameKey, taskName);
 		values.put(columnProjectIdKey, projectId);
 		
 		database.insert(databaseHelper.getTableTasksName(), null, values);
@@ -82,7 +98,7 @@ public class DatabaseManager
 	}
 	
 	@SuppressLint("SimpleDateFormat")
-	public List<Task> getTasks(int projectId) throws ParseException
+	public List<Task> getTasks(int projectId)
 	{
 		Log.d(LOG_TAG, "getTasks is called");
 		List<Task> tasks = new LinkedList<Task>();
@@ -94,8 +110,16 @@ public class DatabaseManager
 		{
 			do
 			{
-				Log.d(LOG_TAG, "getTasks, simpleDate created");
-				Task task = new Task(cursor.getString(1), new LocalDate(cursor.getString(2)));
+				Task task;
+				if (cursor.getString(2) == null)
+				{
+					task = new Task(cursor.getString(1));
+				}
+				else
+				{
+					task = new Task(cursor.getString(1), new LocalDate(cursor.getString(2)));
+					
+				}
 				tasks.add(task);
 			}while(cursor.moveToNext());
 		}
@@ -119,5 +143,31 @@ public class DatabaseManager
 		}
 		database.close();
 		return -1;
+	}
+	
+	public int getTaskId(String name)
+	{
+		Log.d(LOG_TAG, "getTaskId is called");
+		String query = "select id from tasks where name=" + "'" + name + "'";
+		database = databaseHelper.getWritableDatabase();
+		Cursor cursor = database.rawQuery(query, null);
+		if(cursor.moveToFirst())
+		{
+			do
+			{
+				return cursor.getInt(0);
+			}while(cursor.moveToNext());
+		}
+		database.close();
+		return -1;
+	}
+	
+	public void deleteTask(int taskId)
+	{
+		Log.d(LOG_TAG, "deleteTask is called");
+	//	String query = "delete from tasks where id="+taskId;
+		database = databaseHelper.getWritableDatabase();
+		database.delete(databaseHelper.getTableTasksName(), "id=" + taskId, null);
+		database.close();
 	}
 }

@@ -1169,17 +1169,20 @@ containing a value of this type.
         public static final int add_button=0x7f0a0010;
         public static final int add_task_button=0x7f0a0018;
         public static final int add_task_hint=0x7f0a001c;
+        public static final int added_task_message=0x7f0a001d;
         public static final int app_name=0x7f0a000d;
         public static final int completed_button=0x7f0a0012;
         public static final int current_button=0x7f0a0011;
         public static final int current_projects_title=0x7f0a0017;
         public static final int date_format_error_msg=0x7f0a001b;
         public static final int date_format_error_title=0x7f0a001a;
+        public static final int deadline_hint=0x7f0a001f;
         public static final int dialog_confirm_button=0x7f0a0019;
         public static final int new_project_add_button=0x7f0a0016;
         public static final int new_project_textfield_hint=0x7f0a0015;
         public static final int new_project_textfield_label=0x7f0a0014;
         public static final int new_project_title=0x7f0a0013;
+        public static final int no_deadline=0x7f0a001e;
         public static final int title_text=0x7f0a000e;
     }
     public static final class style {

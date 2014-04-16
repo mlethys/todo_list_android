@@ -24,4 +24,7 @@
     <string name="date_format_error_msg">Wystąpił błąd podczas przetwarzania daty</string>
     
     <string name="add_task_hint">Twoje zadanie</string>
+    <string name="added_task_message">Dodano nowe zadanie</string>
+    <string name="no_deadline">Brak</string>
+    <string name="deadline_hint">Trmin oddania zadania</string>
 </resources>

@@ -12,6 +12,7 @@ public class Task
 	public Task(String name)
 	{
 		this.name = name;
+		deadline = null;
 	}
 	
 	public Task(String name, LocalDate deadline)

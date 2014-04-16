@@ -1,8 +1,5 @@
 package pl.mlethys.todolist.view;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-
 import org.joda.time.LocalDate;
 
 import pl.mlethys.todolist.R;
@@ -11,18 +8,20 @@ import pl.mlethys.todolist.model.MySqliteHelper;
 import pl.mlethys.todolist.model.Task;
 import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.app.Dialog;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.LinearLayout.LayoutParams;
+import android.widget.RelativeLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -30,6 +29,7 @@ public class ProjectDetailsActivity extends Activity
 {
 	private final String LOG_TAG = "Project_details_activity";
 	
+	private ScrollView scrollView;
 	private LinearLayout childLayout;
 	private Dialog dateDialog;
 	private String title;
@@ -37,6 +37,7 @@ public class ProjectDetailsActivity extends Activity
 	private MySqliteHelper databaseHelper;
 	private LayoutParams params;
 	private EditText taskNameEditText;
+	
 	@SuppressLint("NewApi")
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
@@ -45,12 +46,17 @@ public class ProjectDetailsActivity extends Activity
 		databaseHelper = new MySqliteHelper(this);
 		dbManager = new DatabaseManager(databaseHelper);
 		
+		params = new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
+		
 		dateDialog = new Dialog(this);
+		LinearLayout parentLayout = new LinearLayout(this);
+		parentLayout.setOrientation(LinearLayout.VERTICAL);
+		
 		
 		LinearLayout mainLayout = new LinearLayout(this);
 		mainLayout.setGravity(Gravity.CENTER|Gravity.TOP);
 		mainLayout.setOrientation(LinearLayout.VERTICAL);	
-		params = new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
+		
 		
 		title = getIntent().getStringExtra("title");
 		
@@ -59,7 +65,10 @@ public class ProjectDetailsActivity extends Activity
 		mainLayout.addView(childLayout, params);
 		setTasks();
 		mainLayout.addView(setAddTaskPanel(), params);
-		setContentView(mainLayout);
+		scrollView = new ScrollView(this);
+		scrollView.addView(mainLayout);
+		parentLayout.addView(scrollView, params);
+		setContentView(parentLayout);
 	}
 	
 	private TextView createTitle(String title)
@@ -82,9 +91,19 @@ public class ProjectDetailsActivity extends Activity
 			public void onClick(View v) 
 			{	
 				DatePicker tmpDatePicker = (DatePicker) dateDialog.findViewById(R.id.date_picker);
-				LocalDate tmpDate = new LocalDate("2014-01-12");
-				dbManager.add(taskNameEditText.getText().toString(), tmpDate, dbManager.getProjectId(title));
-				Toast.makeText(ProjectDetailsActivity.this, tmpDate.toString(), Toast.LENGTH_SHORT).show();
+				LocalDate tmpDate;
+				if(tmpDatePicker == null)
+				{
+					dbManager.add(taskNameEditText.getText().toString(), dbManager.getProjectId(title));
+					Log.d(LOG_TAG, "add task, null date");
+				}
+				else
+				{
+					tmpDate = new LocalDate(tmpDatePicker.getYear() + "-" + tmpDatePicker.getMonth() + "-" + tmpDatePicker.getDayOfMonth());
+					dbManager.add(taskNameEditText.getText().toString(), tmpDate, dbManager.getProjectId(title));
+					Log.d(LOG_TAG, "add task, not null date");
+				}				
+				Toast.makeText(ProjectDetailsActivity.this, R.string.added_task_message, Toast.LENGTH_SHORT).show();
 		
 				finish();
 				startActivity(getIntent());
@@ -134,39 +153,56 @@ public class ProjectDetailsActivity extends Activity
 	private void setTasks()
 	{
 		Log.d(LOG_TAG, "setTasks is called");
-		try
+		for(final Task task : dbManager.getTasks(dbManager.getProjectId(title)))
 		{	
-			for(Task task : dbManager.getTasks(dbManager.getProjectId(title)))
-			{	
-				LinearLayout layout = new LinearLayout(this);
-				layout.setGravity(Gravity.TOP);
-				layout.setOrientation(LinearLayout.HORIZONTAL);
-				TextView taskName = new TextView(this);
-				taskName.append(task.getName());
-				layout.addView(taskName, params);
-				TextView taskDeadline = new TextView(this);
-				taskDeadline.append(task.getDeadline().toString());
-				layout.addView(taskDeadline, params);
-				childLayout.addView(layout);
-			}
+			RelativeLayout layout = new RelativeLayout(this);
+			layout.setGravity(Gravity.TOP);
+			CheckBox checkbox = new CheckBox(this);
+			checkbox.setOnClickListener(new View.OnClickListener()
+			{
+				@Override
+				public void onClick(View v) 
+				{
+					dbManager.deleteTask(dbManager.getTaskId(task.getName()));
+					finish();
+					startActivity(getIntent());
+				}
+			});
+			layout.addView(checkbox);
 			
-		} 
-		catch (ParseException e)
-		{
-			AlertDialog.Builder alert = new AlertDialog.Builder(this);
-			alert.setTitle(R.string.date_format_error_title);
-			alert.setMessage(R.string.date_format_error_msg);
-			alert.show();
-			e.printStackTrace();
-		}
+			TextView taskName = new TextView(this);
+			taskName.append(task.getName());
+
+			taskName.setMaxWidth(300);
+			taskName.setPadding(50, 0, 0, 0);
+			layout.addView(taskName);
+			
+			Log.d(LOG_TAG, "getting date");
+			TextView taskDeadline = new TextView(this);
+			//taskDeadline.setHint(R.string.deadline_hint);
+			taskDeadline.setPadding(350, 0, 0, 0);
+			if(task.getDeadline() != null)
+			{		
+				//taskDeadline.setClickable(true);
+				taskDeadline.append(task.getDeadline().toString());	
+			}
+			else
+			{
+				taskDeadline.append(this.getResources().getText(R.string.no_deadline));
+			}
+			layout.addView(taskDeadline, params);
+			childLayout.addView(layout);
+		}	
 	}
 	
 	private LinearLayout setAddTaskPanel()
 	{
+		Log.d(LOG_TAG, "setAddTaskPanel is called");
 		LinearLayout layout = new LinearLayout(this);
 		layout.setGravity(Gravity.CENTER);
 		layout.setOrientation(LinearLayout.HORIZONTAL);
 		taskNameEditText = new EditText(this);
+		taskNameEditText.setMaxWidth(300);
 		layout.addView(taskNameEditText, params);
 		taskNameEditText.setHint(R.string.add_task_hint);
 		layout.addView(createDatePickerButton(), params);
