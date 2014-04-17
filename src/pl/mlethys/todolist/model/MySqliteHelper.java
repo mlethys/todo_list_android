@@ -34,9 +34,10 @@ public class MySqliteHelper extends SQLiteOpenHelper
 	public void onCreate(SQLiteDatabase database) 
 	{
 		String createTableTasks = "create table " + TABLE_TASKS 
-									+"(id integer primary key autoincrement, "
-									+"name varchar(450) not null, "
-									+"deadline date, "
+									+ "(id integer primary key autoincrement, "
+									+ "name varchar(450) not null, "
+									+ "deadline date, "
+									+ "completed integer default 0, "
 									+ "project_id integer, "
 									+ "foreign key (project_id) references " + TABLE_PROJECTS + "(id))";
 		String createTableProjects = "create table " + TABLE_PROJECTS 

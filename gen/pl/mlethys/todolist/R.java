@@ -794,10 +794,224 @@ containing a value of this type.
         public static final int abc_split_action_bar_is_narrow=0x7f060002;
     }
     public static final class color {
-        public static final int abc_search_url_text_holo=0x7f070003;
+        public static final int AliceBlue=0x7f07003e;
+        public static final int AntiqueWhite=0x7f07003f;
+        public static final int Aquamarine=0x7f070040;
+        /**  a 
+         */
+        public static final int Azure=0x7f07003d;
+        /**  b 
+         */
+        public static final int Beige=0x7f070041;
+        public static final int Bisque=0x7f070046;
+        public static final int BlanchedAlmond=0x7f070047;
+        public static final int BlueViolet=0x7f070044;
+        public static final int Brown=0x7f070043;
+        public static final int BurlyWood=0x7f070042;
+        public static final int CadetBlue=0x7f07004d;
+        public static final int Chartreuse=0x7f07004e;
+        public static final int Chocolate=0x7f07004a;
+        /**  z 
+ custom 
+         */
+        public static final int CompletedProject=0x7f07009b;
+        public static final int Coral=0x7f070049;
+        public static final int CornflowerBlue=0x7f07004c;
+        /**  c 
+         */
+        public static final int Cornsilk=0x7f070048;
+        public static final int Crimson=0x7f07004b;
+        public static final int DarkBlue=0x7f07001a;
+        public static final int DarkCyan=0x7f070017;
+        public static final int DarkGoldenrod=0x7f070025;
+        public static final int DarkGray=0x7f070024;
+        public static final int DarkGreen=0x7f070018;
+        public static final int DarkKhaki=0x7f070026;
+        public static final int DarkMagenta=0x7f07001e;
+        public static final int DarkOliveGreen=0x7f070020;
+        public static final int DarkOrange=0x7f07001b;
+        public static final int DarkOrchid=0x7f07001c;
+        public static final int DarkRed=0x7f07001f;
+        public static final int DarkSalmon=0x7f070019;
+        public static final int DarkSeaGreen=0x7f070023;
+        public static final int DarkSlateBlue=0x7f070022;
+        public static final int DarkSlateGray=0x7f070021;
+        /**  Generic 
+ Generic Dark 
+         */
+        public static final int DarkTurquoise=0x7f070016;
+        public static final int DarkViolet=0x7f07001d;
+        /**  d 
+         */
+        public static final int DeepPink=0x7f07004f;
+        public static final int DeepSkyBlue=0x7f070050;
+        public static final int DimGray=0x7f070051;
+        public static final int DodgerBlue=0x7f070052;
+        public static final int FireBrick=0x7f070056;
+        public static final int FloralWhite=0x7f070055;
+        public static final int ForestGreen=0x7f070054;
+        public static final int Fuchsia=0x7f070057;
+        public static final int Gainsboro=0x7f07005c;
+        public static final int GhostWhite=0x7f07005d;
+        /**  g 
+         */
+        public static final int Gold=0x7f070058;
+        public static final int Goldenrod=0x7f07005b;
+        public static final int GreenYellow=0x7f070059;
+        /**  h 
+         */
+        public static final int Honeydew=0x7f07005e;
+        public static final int HotPink=0x7f07005f;
+        public static final int IndianRed=0x7f070062;
+        /**  i 
+         */
+        public static final int Indigo=0x7f070060;
+        public static final int Ivory=0x7f070061;
+        /**  j 
+ k 
+         */
+        public static final int Khaki=0x7f070063;
+        public static final int Lavender=0x7f070069;
+        public static final int LavenderBlush=0x7f070066;
+        public static final int LawnGreen=0x7f070065;
+        public static final int LemonChiffon=0x7f070068;
+        public static final int LightBlue=0x7f070029;
+        public static final int LightCoral=0x7f07002d;
+        public static final int LightCyan=0x7f07002c;
+        public static final int LightGoldenrodYellow=0x7f070033;
+        public static final int LightGreen=0x7f070031;
+        /**  Generic Light 
+         */
+        public static final int LightGrey=0x7f070027;
+        public static final int LightPink=0x7f07002a;
+        public static final int LightSalmon=0x7f07002b;
+        public static final int LightSeaGreen=0x7f07002f;
+        public static final int LightSkyBlue=0x7f07002e;
+        public static final int LightSlateGray=0x7f070030;
+        public static final int LightSteelBlue=0x7f070028;
+        public static final int LightYellow=0x7f070032;
+        public static final int LimeGreen=0x7f07006a;
+        public static final int Linen=0x7f070067;
+        public static final int Magenta=0x7f07006f;
+        public static final int Maroon=0x7f07006d;
+        public static final int MediumAquamarine=0x7f070035;
+        public static final int MediumBlue=0x7f070039;
+        public static final int MediumOrchid=0x7f070037;
+        public static final int MediumPurple=0x7f070038;
+        public static final int MediumSeaGreen=0x7f07003b;
+        /**  Generic Medium 
+         */
+        public static final int MediumSlateBlue=0x7f070034;
+        public static final int MediumSpringGreen=0x7f07003c;
+        public static final int MediumTurquoise=0x7f07003a;
+        public static final int MediumVioletRed=0x7f070036;
+        public static final int MidnightBlue=0x7f070070;
+        public static final int MintCream=0x7f07006e;
+        public static final int MistyRose=0x7f070071;
+        public static final int Moccasin=0x7f07006c;
+        public static final int NavajoWhite=0x7f070073;
+        public static final int OldLace=0x7f070077;
+        public static final int OliveDrab=0x7f070075;
+        public static final int Orange=0x7f070015;
+        public static final int OrangeRed=0x7f070076;
+        public static final int Orchid=0x7f070078;
+        public static final int PaleGoldenrod=0x7f07007c;
+        public static final int PaleGreen=0x7f07007f;
+        public static final int PaleTurquoise=0x7f070081;
+        public static final int PaleVioletRed=0x7f07007d;
+        public static final int PapayaWhip=0x7f070082;
+        /**  p 
+         */
+        public static final int PeachPuff=0x7f070079;
+        public static final int Peru=0x7f07007b;
+        public static final int Pink=0x7f07007a;
+        public static final int Plum=0x7f07007e;
+        public static final int PowderBlue=0x7f070080;
+        public static final int RosyBrown=0x7f070084;
+        /**  q 
+ r 
+         */
+        public static final int RoyalBlue=0x7f070083;
+        public static final int SaddleBrown=0x7f07008f;
+        public static final int Salmon=0x7f070090;
+        public static final int SandyBrown=0x7f070091;
+        public static final int SeaGreen=0x7f07008b;
+        public static final int Seashell=0x7f070086;
+        public static final int Sienna=0x7f070088;
+        public static final int SkyBlue=0x7f07008a;
+        public static final int SlateBlue=0x7f07008e;
+        public static final int SlateGray=0x7f07008d;
+        public static final int Snow=0x7f070087;
+        public static final int SpringGreen=0x7f070089;
+        public static final int SteelBlue=0x7f07008c;
+        public static final int Tan=0x7f070094;
+        /**  t 
+         */
+        public static final int Thistle=0x7f070092;
+        public static final int Tomato=0x7f070095;
+        public static final int Turquoise=0x7f070093;
+        public static final int Violet=0x7f070097;
+        public static final int Wheat=0x7f070099;
+        /**  w 
+         */
+        public static final int WhiteSmoke=0x7f070098;
+        /**  x 
+ y 
+         */
+        public static final int YellowGreen=0x7f07009a;
+        public static final int abc_search_url_text_holo=0x7f07009c;
         public static final int abc_search_url_text_normal=0x7f070000;
         public static final int abc_search_url_text_pressed=0x7f070002;
         public static final int abc_search_url_text_selected=0x7f070001;
+        /**  Android style 
+         */
+        public static final int android_green=0x7f070003;
+        public static final int aqua=0x7f070045;
+        public static final int black=0x7f07000f;
+        public static final int blue=0x7f070012;
+        /**  e 
+ f 
+         */
+        public static final int fuchsia=0x7f070053;
+        public static final int gray=0x7f07005a;
+        public static final int green=0x7f070011;
+        /**  l 
+         */
+        public static final int lime=0x7f070064;
+        /**  m 
+         */
+        public static final int maroon=0x7f07006b;
+        /**  n 
+         */
+        public static final int navy=0x7f070072;
+        /**  o 
+         */
+        public static final int olive=0x7f070074;
+        /**  u 
+ v 
+         */
+        public static final int purple=0x7f070096;
+        public static final int red=0x7f070010;
+        /**  s 
+         */
+        public static final int silver=0x7f070085;
+        public static final int teal=0x7f070014;
+        /**  Common 
+         */
+        public static final int white=0x7f07000e;
+        public static final int win8_blue=0x7f07000b;
+        public static final int win8_brown=0x7f070008;
+        public static final int win8_green=0x7f07000d;
+        public static final int win8_lime=0x7f070007;
+        /**  Windows 8 style 
+         */
+        public static final int win8_magenta=0x7f070004;
+        public static final int win8_orange=0x7f07000a;
+        public static final int win8_pink=0x7f070009;
+        public static final int win8_purple=0x7f070005;
+        public static final int win8_red=0x7f07000c;
+        public static final int win8_teal=0x7f070006;
+        public static final int yellow=0x7f070013;
     }
     public static final class dimen {
         /**  Default height of an action bar. 
@@ -996,7 +1210,7 @@ containing a value of this type.
         public static final int action_menu_divider=0x7f050016;
         public static final int action_menu_presenter=0x7f050017;
         public static final int action_mode_close_button=0x7f050024;
-        public static final int action_settings=0x7f05004d;
+        public static final int action_settings=0x7f05004f;
         public static final int activity_chooser_view_content=0x7f050025;
         public static final int add_project_button=0x7f05003e;
         public static final int always=0x7f05000b;
@@ -1004,16 +1218,18 @@ containing a value of this type.
         public static final int checkbox=0x7f05002d;
         public static final int collapseActionView=0x7f05000d;
         public static final int completed_projects_button=0x7f050040;
+        public static final int completed_projects_listview=0x7f050043;
+        public static final int completed_projects_title=0x7f050042;
         public static final int container=0x7f05003c;
         public static final int current_projects_button=0x7f05003f;
         public static final int current_projects_container=0x7f050041;
-        public static final int current_projects_listview=0x7f050043;
-        public static final int current_projects_title=0x7f050042;
-        public static final int date_picker=0x7f050045;
-        public static final int date_picker_container=0x7f050044;
+        public static final int current_projects_listview=0x7f050045;
+        public static final int current_projects_title=0x7f050044;
+        public static final int date_picker=0x7f050047;
+        public static final int date_picker_container=0x7f050046;
         public static final int default_activity_button=0x7f050028;
         public static final int dialog=0x7f05000e;
-        public static final int dialog_confirm_button=0x7f050046;
+        public static final int dialog_confirm_button=0x7f050048;
         public static final int disableHome=0x7f050008;
         public static final int dropdown=0x7f05000f;
         public static final int edit_query=0x7f050030;
@@ -1029,14 +1245,14 @@ containing a value of this type.
         public static final int list_item=0x7f050029;
         public static final int middle=0x7f050012;
         public static final int never=0x7f050009;
-        public static final int new_project_add_button=0x7f05004b;
-        public static final int new_project_container=0x7f050047;
-        public static final int new_project_title=0x7f050048;
+        public static final int new_project_add_button=0x7f05004d;
+        public static final int new_project_container=0x7f050049;
+        public static final int new_project_title=0x7f05004a;
         public static final int none=0x7f050010;
         public static final int normal=0x7f050000;
         public static final int progress_circular=0x7f050018;
         public static final int progress_horizontal=0x7f050019;
-        public static final int project_details_container=0x7f05004c;
+        public static final int project_details_container=0x7f05004e;
         public static final int radio=0x7f05002f;
         public static final int search_badge=0x7f050032;
         public static final int search_bar=0x7f050031;
@@ -1055,8 +1271,8 @@ containing a value of this type.
         public static final int split_action_bar=0x7f05001e;
         public static final int submit_area=0x7f050039;
         public static final int tabMode=0x7f050002;
-        public static final int text_field=0x7f05004a;
-        public static final int text_field_label=0x7f050049;
+        public static final int text_field=0x7f05004c;
+        public static final int text_field_label=0x7f05004b;
         public static final int title=0x7f05002b;
         public static final int title_text=0x7f05003d;
         public static final int top_action_bar=0x7f050020;
@@ -1114,12 +1330,13 @@ containing a value of this type.
         public static final int abc_search_dropdown_item_icons_2line=0x7f030015;
         public static final int abc_search_view=0x7f030016;
         public static final int activity_main=0x7f030017;
-        public static final int current_projects_activity=0x7f030018;
-        public static final int date_picker_dialog=0x7f030019;
-        public static final int fragment_main=0x7f03001a;
-        public static final int new_project_activity=0x7f03001b;
-        public static final int project_details_activity=0x7f03001c;
-        public static final int support_simple_spinner_dropdown_item=0x7f03001d;
+        public static final int completed_projects_activity=0x7f030018;
+        public static final int current_projects_activity=0x7f030019;
+        public static final int date_picker_dialog=0x7f03001a;
+        public static final int fragment_main=0x7f03001b;
+        public static final int new_project_activity=0x7f03001c;
+        public static final int project_details_activity=0x7f03001d;
+        public static final int support_simple_spinner_dropdown_item=0x7f03001e;
     }
     public static final class menu {
         public static final int main=0x7f0c0000;
@@ -1167,22 +1384,24 @@ containing a value of this type.
         public static final int abc_shareactionprovider_share_with_application=0x7f0a000b;
         public static final int action_settings=0x7f0a000f;
         public static final int add_button=0x7f0a0010;
-        public static final int add_task_button=0x7f0a0018;
-        public static final int add_task_hint=0x7f0a001c;
-        public static final int added_task_message=0x7f0a001d;
+        public static final int add_task_button=0x7f0a0019;
+        public static final int add_task_hint=0x7f0a001d;
+        public static final int added_task_message=0x7f0a001e;
         public static final int app_name=0x7f0a000d;
         public static final int completed_button=0x7f0a0012;
+        public static final int completed_projects_title=0x7f0a0018;
         public static final int current_button=0x7f0a0011;
         public static final int current_projects_title=0x7f0a0017;
-        public static final int date_format_error_msg=0x7f0a001b;
-        public static final int date_format_error_title=0x7f0a001a;
-        public static final int deadline_hint=0x7f0a001f;
-        public static final int dialog_confirm_button=0x7f0a0019;
+        public static final int date_format_error_msg=0x7f0a001c;
+        public static final int date_format_error_title=0x7f0a001b;
+        public static final int deadline_hint=0x7f0a0020;
+        public static final int dialog_confirm_button=0x7f0a001a;
+        public static final int edit_project_title_hint=0x7f0a0021;
         public static final int new_project_add_button=0x7f0a0016;
         public static final int new_project_textfield_hint=0x7f0a0015;
         public static final int new_project_textfield_label=0x7f0a0014;
         public static final int new_project_title=0x7f0a0013;
-        public static final int no_deadline=0x7f0a001e;
+        public static final int no_deadline=0x7f0a001f;
         public static final int title_text=0x7f0a000e;
     }
     public static final class style {

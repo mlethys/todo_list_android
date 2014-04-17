@@ -38,6 +38,10 @@
      	    android:name="pl.mlethys.todolist.view.DatePickerDialog"
      	    android:label="@string/app_name" >
      	</activity>
+     	<activity
+     	    android:name="pl.mlethys.todolist.view.CompletedProjectsActivity"
+     	    android:label="@string/app_name" >     	   
+     	</activity>
     </application>
 
 </manifest>

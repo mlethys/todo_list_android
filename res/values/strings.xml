@@ -15,6 +15,7 @@
     <string name="new_project_add_button">Dodaj</string>
     
     <string name="current_projects_title">Bieżące projekty</string>
+    <string name="completed_projects_title">Zakończone projekty</string>
     
     <string name="add_task_button">Dodaj</string>
     
@@ -27,4 +28,7 @@
     <string name="added_task_message">Dodano nowe zadanie</string>
     <string name="no_deadline">Brak</string>
     <string name="deadline_hint">Trmin oddania zadania</string>
+    
+    <string name="edit_project_title_hint">Nowy tytuł</string>
+
 </resources>

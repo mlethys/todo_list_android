@@ -38,11 +38,16 @@ public class MainActivity extends ActionBarActivity
 		Intent currentProjectsIntent = new Intent(MainActivity.this, CurrentProjectsActivity.class);
 		startActivity(currentProjectsIntent);
 	}
+	
+	public void goToCompletedProjects(View view)
+	{
+		Intent completedProjectsIntent = new Intent(MainActivity.this, CompletedProjectsActivity.class);
+		startActivity(completedProjectsIntent);
+	}
 
 	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-
-		// Inflate the menu; this adds items to the action bar if it is present.
+	public boolean onCreateOptionsMenu(Menu menu) 
+	{
 		getMenuInflater().inflate(R.menu.main, menu);
 		return true;
 	}

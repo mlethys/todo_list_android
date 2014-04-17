@@ -1,8 +1,5 @@
 package pl.mlethys.todolist.model;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -97,12 +94,34 @@ public class DatabaseManager
 		return currentProjects;
 	}
 	
+	public List<String> getCompletedProjects()
+	{
+		Log.d(LOG_TAG, "getCompletedProjects is called");
+		List<String> completedProjects = new LinkedList<String>();
+		
+		String query = "select * from projects where completed=1";
+		
+		database = databaseHelper.getWritableDatabase();
+		Cursor cursor = database.rawQuery(query, null);
+		
+		if(cursor.moveToFirst())
+		{
+			do
+			{
+				completedProjects.add(cursor.getString(1));
+			} while(cursor.moveToNext());
+		}
+		database.close();
+		Log.d(LOG_TAG, "getCompletedProjects, created list of projects");
+		return completedProjects;
+	}
+	
 	@SuppressLint("SimpleDateFormat")
 	public List<Task> getTasks(int projectId)
 	{
 		Log.d(LOG_TAG, "getTasks is called");
 		List<Task> tasks = new LinkedList<Task>();
-		String query = "select * from tasks where project_id=" + projectId;
+		String query = "select * from tasks where project_id=" + projectId + " and completed=0";
 		
 		database = databaseHelper.getWritableDatabase();
 		Cursor cursor = database.rawQuery(query, null);
@@ -127,6 +146,7 @@ public class DatabaseManager
 		Log.d(LOG_TAG, "getTasks ended");
 		return tasks;
 	}
+	
 	
 	public int getProjectId(String name)
 	{
@@ -162,12 +182,40 @@ public class DatabaseManager
 		return -1;
 	}
 	
-	public void deleteTask(int taskId)
+	public void completeTask(int taskId)
 	{
-		Log.d(LOG_TAG, "deleteTask is called");
-	//	String query = "delete from tasks where id="+taskId;
+		Log.d(LOG_TAG, "completeTask is called");
+		String query = "update "+ databaseHelper.getTableTasksName() + " set completed=1 where id=" + taskId + " and completed=0";
 		database = databaseHelper.getWritableDatabase();
-		database.delete(databaseHelper.getTableTasksName(), "id=" + taskId, null);
+		database.execSQL(query);
 		database.close();
 	}
+	
+	public void completeProject(int projectId)
+	{
+		Log.d(LOG_TAG, "completeTask is called");
+		String query = "update "+ databaseHelper.getTableProjectsName() + " set completed=1 where id=" + projectId + " and completed=0";
+		database = databaseHelper.getWritableDatabase();
+		database.execSQL(query);
+		database.close();
+	}
+	
+	public void unCompleteProject(int projectId)
+	{
+		Log.d(LOG_TAG, "completeTask is called");
+		String query = "update "+ databaseHelper.getTableProjectsName() + " set completed=0 where id=" + projectId + " and completed=1";
+		database = databaseHelper.getWritableDatabase();
+		database.execSQL(query);
+		database.close();
+	}
+	
+	public void changeProjectName(int projectId, String name)
+	{
+		Log.d(LOG_TAG, "changeProjectName is called");
+		String query = "update "+ databaseHelper.getTableProjectsName() + " set name='" + name + "' where id=" + projectId;
+		database = databaseHelper.getWritableDatabase();
+		database.execSQL(query);
+		database.close();
+	}
+	
 }

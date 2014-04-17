@@ -37,6 +37,8 @@ public class ProjectDetailsActivity extends Activity
 	private MySqliteHelper databaseHelper;
 	private LayoutParams params;
 	private EditText taskNameEditText;
+	private LinearLayout titleLayout;
+	private TextView activityTitle;
 	
 	@SuppressLint("NewApi")
 	@Override
@@ -57,10 +59,12 @@ public class ProjectDetailsActivity extends Activity
 		mainLayout.setGravity(Gravity.CENTER|Gravity.TOP);
 		mainLayout.setOrientation(LinearLayout.VERTICAL);	
 		
+		titleLayout = new LinearLayout(this);
 		
 		title = getIntent().getStringExtra("title");
 		
-		mainLayout.addView(createTitle(title), params);
+		setUpTitle();
+		mainLayout.addView(titleLayout);
 		childLayout = createChildLayout();
 		mainLayout.addView(childLayout, params);
 		setTasks();
@@ -71,14 +75,76 @@ public class ProjectDetailsActivity extends Activity
 		setContentView(parentLayout);
 	}
 	
+	
 	private TextView createTitle(String title)
 	{
-		TextView activityTitle = new TextView(this);
+		final EditText editText = new EditText(this);
+		
+		final Button button = new Button(this);
+		button.setText("ok");
+		button.setOnClickListener(new View.OnClickListener()
+		{
+			@Override
+			public void onClick(View v)
+			{
+				int id = dbManager.getProjectId(activityTitle.getText().toString());
+				activityTitle.setText(editText.getText());
+				dbManager.changeProjectName(id, editText.getText().toString());
+				titleLayout.removeView(editText);
+				titleLayout.removeView(button);				
+				activityTitle.setVisibility(View.VISIBLE);
+			}
+		});
+		
+		editText.setHint(R.string.edit_project_title_hint);
+		activityTitle = new TextView(this);
 		activityTitle.append(title);
 		activityTitle.setTextSize(30f);
-		activityTitle.setGravity(Gravity.CENTER);
+		activityTitle.setMaxWidth(350);
+		activityTitle.setOnLongClickListener(new View.OnLongClickListener() 
+		{
+	        @Override
+	        public boolean onLongClick(View v) 
+	        {
+	            activityTitle.setVisibility(View.GONE);
+	            titleLayout.addView(editText);
+	            titleLayout.addView(button);
+	            return true;
+	        }
+	    });
 		return activityTitle;
 	}
+	
+	@SuppressLint("ResourceAsColor")
+	private CheckBox createProjectCheckbox()
+	{
+		final CheckBox titleCheckbox = new CheckBox(this);
+		titleCheckbox.setOnClickListener(new View.OnClickListener()
+		{
+			@Override
+			public void onClick(View v)
+			{
+				dbManager.completeProject(dbManager.getProjectId(title));
+				activityTitle.setTextColor(getResources().getColor(R.color.CompletedProject));
+				if(!titleCheckbox.isChecked())
+				{
+					dbManager.unCompleteProject(dbManager.getProjectId(title));
+					activityTitle.setTextColor(getResources().getColor(R.color.black));
+				}
+			}
+		});
+		return titleCheckbox;
+	}
+	
+	private void setUpTitle()
+	{
+		titleLayout = new LinearLayout(this);
+		titleLayout.setOrientation(LinearLayout.HORIZONTAL);
+		titleLayout.setGravity(Gravity.CENTER);
+		titleLayout.addView(createProjectCheckbox(), params);
+		titleLayout.addView(createTitle(title), params);
+	}
+	
 	
 	@SuppressLint({ "SimpleDateFormat", "ShowToast" })
 	private Button createAddTaskButton()
@@ -163,7 +229,7 @@ public class ProjectDetailsActivity extends Activity
 				@Override
 				public void onClick(View v) 
 				{
-					dbManager.deleteTask(dbManager.getTaskId(task.getName()));
+					dbManager.completeTask(dbManager.getTaskId(task.getName()));
 					finish();
 					startActivity(getIntent());
 				}
@@ -173,17 +239,16 @@ public class ProjectDetailsActivity extends Activity
 			TextView taskName = new TextView(this);
 			taskName.append(task.getName());
 
+			
 			taskName.setMaxWidth(300);
 			taskName.setPadding(50, 0, 0, 0);
 			layout.addView(taskName);
 			
 			Log.d(LOG_TAG, "getting date");
 			TextView taskDeadline = new TextView(this);
-			//taskDeadline.setHint(R.string.deadline_hint);
 			taskDeadline.setPadding(350, 0, 0, 0);
 			if(task.getDeadline() != null)
 			{		
-				//taskDeadline.setClickable(true);
 				taskDeadline.append(task.getDeadline().toString());	
 			}
 			else
@@ -192,7 +257,7 @@ public class ProjectDetailsActivity extends Activity
 			}
 			layout.addView(taskDeadline, params);
 			childLayout.addView(layout);
-		}	
+		}
 	}
 	
 	private LinearLayout setAddTaskPanel()
