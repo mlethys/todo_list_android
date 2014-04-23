@@ -8,8 +8,14 @@ import pl.mlethys.todolist.model.MySqliteHelper;
 import pl.mlethys.todolist.model.Task;
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.res.ColorStateList;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
@@ -75,28 +81,45 @@ public class ProjectDetailsActivity extends Activity
 		setContentView(parentLayout);
 	}
 	
+	@Override
+	public void onBackPressed()
+	{
+		finish();
+		Intent intent = new Intent(ProjectDetailsActivity.this, CurrentProjectsActivity.class);
+		startActivity(intent);
+	}
 	
-	private TextView createTitle(String title)
+	@SuppressLint("NewApi")
+	private EditText createNameChanger()
 	{
 		final EditText editText = new EditText(this);
-		
 		final Button button = new Button(this);
-		button.setText("ok");
+		button.setText(R.string.dialog_confirm_button);
 		button.setOnClickListener(new View.OnClickListener()
 		{
 			@Override
 			public void onClick(View v)
 			{
-				int id = dbManager.getProjectId(activityTitle.getText().toString());
-				activityTitle.setText(editText.getText());
-				dbManager.changeProjectName(id, editText.getText().toString());
-				titleLayout.removeView(editText);
-				titleLayout.removeView(button);				
-				activityTitle.setVisibility(View.VISIBLE);
+					int id = dbManager.getProjectId(activityTitle.getText().toString());
+					if(!editText.getText().toString().isEmpty())
+					{
+						activityTitle.setText(editText.getText());
+						dbManager.changeProjectName(id, editText.getText().toString());
+					}
+					titleLayout.removeView(editText);
+					titleLayout.removeView(button);				
+					activityTitle.setVisibility(View.VISIBLE);
 			}
 		});
-		
+
+		titleLayout.addView(button);
 		editText.setHint(R.string.edit_project_title_hint);
+		return editText;
+	}
+	
+	
+	private TextView createTitle(String title)
+	{
 		activityTitle = new TextView(this);
 		activityTitle.append(title);
 		activityTitle.setTextSize(30f);
@@ -107,8 +130,7 @@ public class ProjectDetailsActivity extends Activity
 	        public boolean onLongClick(View v) 
 	        {
 	            activityTitle.setVisibility(View.GONE);
-	            titleLayout.addView(editText);
-	            titleLayout.addView(button);
+	            titleLayout.addView(createNameChanger());
 	            return true;
 	        }
 	    });
@@ -146,7 +168,7 @@ public class ProjectDetailsActivity extends Activity
 	}
 	
 	
-	@SuppressLint({ "SimpleDateFormat", "ShowToast" })
+	@SuppressLint({ "ShowToast", "NewApi" })
 	private Button createAddTaskButton()
 	{
 		Button button = new Button(this);
@@ -158,26 +180,70 @@ public class ProjectDetailsActivity extends Activity
 			{	
 				DatePicker tmpDatePicker = (DatePicker) dateDialog.findViewById(R.id.date_picker);
 				LocalDate tmpDate;
-				if(tmpDatePicker == null)
+				final Drawable originalDrawable = taskNameEditText.getBackground();
+				final ColorStateList color = taskNameEditText.getHintTextColors();
+				if (taskNameEditText.getText().toString().isEmpty())
 				{
-					dbManager.add(taskNameEditText.getText().toString(), dbManager.getProjectId(title));
-					Log.d(LOG_TAG, "add task, null date");
+					new CountDownTimer(200, 100)
+					{
+
+						@SuppressWarnings("deprecation")
+						@Override
+						public void onFinish() 
+						{
+							taskNameEditText.setBackgroundDrawable(originalDrawable);
+							taskNameEditText.setHintTextColor(color.getDefaultColor());
+						}
+
+						@Override
+						public void onTick(long arg0) 
+						{
+							taskNameEditText.setBackgroundColor(getResources().getColor(R.color.red));
+							taskNameEditText.setHintTextColor(getResources().getColor(R.color.white));
+							
+						}
+						
+					}.start();
 				}
 				else
 				{
-					tmpDate = new LocalDate(tmpDatePicker.getYear() + "-" + tmpDatePicker.getMonth() + "-" + tmpDatePicker.getDayOfMonth());
-					dbManager.add(taskNameEditText.getText().toString(), tmpDate, dbManager.getProjectId(title));
-					Log.d(LOG_TAG, "add task, not null date");
-				}				
-				Toast.makeText(ProjectDetailsActivity.this, R.string.added_task_message, Toast.LENGTH_SHORT).show();
-		
-				finish();
-				startActivity(getIntent());
-				
+					if(tmpDatePicker == null)
+					{
+					
+						dbManager.add(taskNameEditText.getText().toString(), dbManager.getProjectId(title));
+						Log.d(LOG_TAG, "add task, null date");
+					}
+					else
+					{
+						tmpDate = new LocalDate(tmpDatePicker.getYear() + "-" + tmpDatePicker.getMonth() + "-" + tmpDatePicker.getDayOfMonth());
+						dbManager.add(taskNameEditText.getText().toString(), tmpDate, dbManager.getProjectId(title));
+						Log.d(LOG_TAG, "add task, not null date");
+					}
+					Toast.makeText(ProjectDetailsActivity.this, R.string.added_task_message, Toast.LENGTH_SHORT).show();
+					
+					finish();
+					startActivity(getIntent());
+				}
 			}
 		});
 		return button;
 		
+	}
+	
+	private void createDialogButton()
+	{
+		dateDialog.setContentView(R.layout.date_picker_dialog);
+		
+		Button button = (Button) dateDialog.findViewById(R.id.dialog_confirm_button);
+		button.setOnClickListener(new View.OnClickListener()
+		{		
+			@Override
+			public void onClick(View v) 
+			{
+				dateDialog.dismiss();
+				
+			}
+		});
 	}
 	
 	@SuppressLint("NewApi")
@@ -190,18 +256,7 @@ public class ProjectDetailsActivity extends Activity
 			@Override
 			public void onClick(View v) 
 			{		
-				dateDialog.setContentView(R.layout.date_picker_dialog);
-				
-				Button button = (Button) dateDialog.findViewById(R.id.dialog_confirm_button);
-				button.setOnClickListener(new View.OnClickListener()
-				{		
-					@Override
-					public void onClick(View v) 
-					{
-						dateDialog.dismiss();
-						
-					}
-				});
+				createDialogButton();
 				dateDialog.show();
 			}
 		});
@@ -236,7 +291,7 @@ public class ProjectDetailsActivity extends Activity
 			});
 			layout.addView(checkbox);
 			
-			TextView taskName = new TextView(this);
+			final TextView taskName = new TextView(this);
 			taskName.append(task.getName());
 
 			

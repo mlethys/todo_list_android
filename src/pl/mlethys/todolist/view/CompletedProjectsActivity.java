@@ -7,13 +7,14 @@ import pl.mlethys.todolist.R;
 import pl.mlethys.todolist.model.DatabaseManager;
 import pl.mlethys.todolist.model.MySqliteHelper;
 import android.app.Activity;
-import android.content.Intent;
+import android.app.Dialog;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.ListView;
 
 public class CompletedProjectsActivity extends Activity implements OnItemClickListener
 {
@@ -22,6 +23,7 @@ public class CompletedProjectsActivity extends Activity implements OnItemClickLi
 	private ArrayAdapter<String> arrayAdapter;
 	private ListView listView;
 	private List<String> projectsList;
+	private Dialog dialog;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
@@ -44,7 +46,36 @@ public class CompletedProjectsActivity extends Activity implements OnItemClickLi
 	@Override
 	public void onItemClick(AdapterView<?> parent, View view, int position, long id) 
 	{
-		/*Intent projectDetailsIntent = new Intent(CompletedProjectsActivity.this, ProjectDetailsActivity.class).putExtra("title", projectsList.get(position));
-		startActivity(projectDetailsIntent);*/
+		createDeleteDialog(position);
+	}
+	
+	private void createDeleteDialog(final int position)
+	{
+		dialog = new Dialog(this);
+		dialog.setContentView(R.layout.delete_dialog);
+		dialog.show();
+		
+		Button yesButton = (Button) dialog.findViewById(R.id.confirm_delete_button);
+		yesButton.setOnClickListener(new View.OnClickListener()
+		{
+			@Override
+			public void onClick(View v) 
+			{
+				dbManager.deleteProject(dbManager.getProjectId(projectsList.get(position)));
+				dialog.dismiss();
+				finish();
+				startActivity(getIntent());
+			}
+		});
+		
+		Button noButton = (Button) dialog.findViewById(R.id.cancel_delete_button);
+		noButton.setOnClickListener(new View.OnClickListener()
+		{
+			@Override
+			public void onClick(View v) 
+			{
+				dialog.dismiss();
+			}
+		});
 	}
 }

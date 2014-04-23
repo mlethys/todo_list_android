@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+   xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/delete_project_container"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical"
+    tools:ignore="MergeRootFrame" >
+    <TextView 
+        android:id="@+id/delete_project_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="@string/delete_project"/>
+    <LinearLayout 
+	    android:id="@+id/delete_project_buttons_container"
+	    android:layout_width="fill_parent"
+	    android:layout_height="fill_parent"
+	    android:layout_gravity="center"
+	    android:gravity="center"
+	    android:orientation="horizontal">
+        <Button
+            android:id="@+id/confirm_delete_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="@string/confirm_delete_button"/>
+    	<Button 
+            android:id="@+id/cancel_delete_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="@string/cancel_delete_button"/>"
+    </LinearLayout>
+    
+
+</LinearLayout>

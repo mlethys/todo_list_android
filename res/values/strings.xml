@@ -30,5 +30,12 @@
     <string name="deadline_hint">Trmin oddania zadania</string>
     
     <string name="edit_project_title_hint">Nowy tytuł</string>
+    
+    <string name="completed_project_msg">Zakończony</string>
+    <string name="delete_project">Chcesz usunąć?</string>
+    <string name="confirm_delete_button">Tak</string>
+    <string name="cancel_delete_button">Nie</string>
+    
+    <string name="notification_title">Zadanie do wykonania</string>
 
 </resources>

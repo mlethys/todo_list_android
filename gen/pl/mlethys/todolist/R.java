@@ -1210,16 +1210,18 @@ containing a value of this type.
         public static final int action_menu_divider=0x7f050016;
         public static final int action_menu_presenter=0x7f050017;
         public static final int action_mode_close_button=0x7f050024;
-        public static final int action_settings=0x7f05004f;
+        public static final int action_settings=0x7f050054;
         public static final int activity_chooser_view_content=0x7f050025;
         public static final int add_project_button=0x7f05003e;
         public static final int always=0x7f05000b;
         public static final int beginning=0x7f050011;
+        public static final int cancel_delete_button=0x7f05004d;
         public static final int checkbox=0x7f05002d;
         public static final int collapseActionView=0x7f05000d;
         public static final int completed_projects_button=0x7f050040;
         public static final int completed_projects_listview=0x7f050043;
         public static final int completed_projects_title=0x7f050042;
+        public static final int confirm_delete_button=0x7f05004c;
         public static final int container=0x7f05003c;
         public static final int current_projects_button=0x7f05003f;
         public static final int current_projects_container=0x7f050041;
@@ -1228,6 +1230,9 @@ containing a value of this type.
         public static final int date_picker=0x7f050047;
         public static final int date_picker_container=0x7f050046;
         public static final int default_activity_button=0x7f050028;
+        public static final int delete_project_buttons_container=0x7f05004b;
+        public static final int delete_project_container=0x7f050049;
+        public static final int delete_project_text=0x7f05004a;
         public static final int dialog=0x7f05000e;
         public static final int dialog_confirm_button=0x7f050048;
         public static final int disableHome=0x7f050008;
@@ -1245,14 +1250,14 @@ containing a value of this type.
         public static final int list_item=0x7f050029;
         public static final int middle=0x7f050012;
         public static final int never=0x7f050009;
-        public static final int new_project_add_button=0x7f05004d;
-        public static final int new_project_container=0x7f050049;
-        public static final int new_project_title=0x7f05004a;
+        public static final int new_project_add_button=0x7f050052;
+        public static final int new_project_container=0x7f05004e;
+        public static final int new_project_title=0x7f05004f;
         public static final int none=0x7f050010;
         public static final int normal=0x7f050000;
         public static final int progress_circular=0x7f050018;
         public static final int progress_horizontal=0x7f050019;
-        public static final int project_details_container=0x7f05004e;
+        public static final int project_details_container=0x7f050053;
         public static final int radio=0x7f05002f;
         public static final int search_badge=0x7f050032;
         public static final int search_bar=0x7f050031;
@@ -1271,8 +1276,8 @@ containing a value of this type.
         public static final int split_action_bar=0x7f05001e;
         public static final int submit_area=0x7f050039;
         public static final int tabMode=0x7f050002;
-        public static final int text_field=0x7f05004c;
-        public static final int text_field_label=0x7f05004b;
+        public static final int text_field=0x7f050051;
+        public static final int text_field_label=0x7f050050;
         public static final int title=0x7f05002b;
         public static final int title_text=0x7f05003d;
         public static final int top_action_bar=0x7f050020;
@@ -1333,10 +1338,11 @@ containing a value of this type.
         public static final int completed_projects_activity=0x7f030018;
         public static final int current_projects_activity=0x7f030019;
         public static final int date_picker_dialog=0x7f03001a;
-        public static final int fragment_main=0x7f03001b;
-        public static final int new_project_activity=0x7f03001c;
-        public static final int project_details_activity=0x7f03001d;
-        public static final int support_simple_spinner_dropdown_item=0x7f03001e;
+        public static final int delete_dialog=0x7f03001b;
+        public static final int fragment_main=0x7f03001c;
+        public static final int new_project_activity=0x7f03001d;
+        public static final int project_details_activity=0x7f03001e;
+        public static final int support_simple_spinner_dropdown_item=0x7f03001f;
     }
     public static final class menu {
         public static final int main=0x7f0c0000;
@@ -1388,13 +1394,17 @@ containing a value of this type.
         public static final int add_task_hint=0x7f0a001d;
         public static final int added_task_message=0x7f0a001e;
         public static final int app_name=0x7f0a000d;
+        public static final int cancel_delete_button=0x7f0a0025;
         public static final int completed_button=0x7f0a0012;
+        public static final int completed_project_msg=0x7f0a0022;
         public static final int completed_projects_title=0x7f0a0018;
+        public static final int confirm_delete_button=0x7f0a0024;
         public static final int current_button=0x7f0a0011;
         public static final int current_projects_title=0x7f0a0017;
         public static final int date_format_error_msg=0x7f0a001c;
         public static final int date_format_error_title=0x7f0a001b;
         public static final int deadline_hint=0x7f0a0020;
+        public static final int delete_project=0x7f0a0023;
         public static final int dialog_confirm_button=0x7f0a001a;
         public static final int edit_project_title_hint=0x7f0a0021;
         public static final int new_project_add_button=0x7f0a0016;
@@ -1402,6 +1412,7 @@ containing a value of this type.
         public static final int new_project_textfield_label=0x7f0a0014;
         public static final int new_project_title=0x7f0a0013;
         public static final int no_deadline=0x7f0a001f;
+        public static final int notification_title=0x7f0a0026;
         public static final int title_text=0x7f0a000e;
     }
     public static final class style {

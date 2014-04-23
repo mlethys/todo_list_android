@@ -218,4 +218,40 @@ public class DatabaseManager
 		database.close();
 	}
 	
+	public void changeTaskDeadline(int taskId, LocalDate date)
+	{
+		Log.d(LOG_TAG, "changeTaskDeadline is called");
+		String query = "update " + databaseHelper.getTableTasksName() + " set deadline=" + date.toString() + " where id=" + taskId;
+		database = databaseHelper.getWritableDatabase();
+		database.execSQL(query);
+		database.close();
+	}
+	
+	public void deleteProject(int projectId)
+	{
+		Log.d(LOG_TAG, "deleteProject is called");	
+		String query = "delete from projects where id=" + projectId + " and completed=1";
+		database = databaseHelper.getWritableDatabase();
+		database.execSQL(query);
+		database.close();
+	}
+	
+	public LocalDate getTaskDeadline(int taskId)
+	{
+		Log.d(LOG_TAG, "getTaskDeadline is called");	
+		String query = "select deadline from " + databaseHelper.getTableTasksName() + " where id=" + taskId;
+		database = databaseHelper.getWritableDatabase();
+		Cursor cursor = database.rawQuery(query, null);
+		if(cursor.moveToFirst())
+		{
+			do
+			{
+				return new LocalDate(cursor.getLong(1));
+			}while(cursor.moveToNext());
+		}
+
+		database.close();
+		return null;
+	}
+	
 }

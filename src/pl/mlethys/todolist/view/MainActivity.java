@@ -1,6 +1,12 @@
 package pl.mlethys.todolist.view;
 
+import org.joda.time.LocalDate;
+
 import pl.mlethys.todolist.R;
+import pl.mlethys.todolist.model.DatabaseManager;
+import pl.mlethys.todolist.model.DateCheckService;
+import pl.mlethys.todolist.model.DeadlineChecker;
+import pl.mlethys.todolist.model.MySqliteHelper;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -13,7 +19,8 @@ import android.view.ViewGroup;
 
 public class MainActivity extends ActionBarActivity
 {
-
+	private DatabaseManager dbManager;
+	private MySqliteHelper databaseHelper;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -25,6 +32,24 @@ public class MainActivity extends ActionBarActivity
 			getSupportFragmentManager().beginTransaction()
 					.add(R.id.container, new PlaceholderFragment()).commit();
 		}
+//		DateCheckService service = new DateCheckService(getDate());
+//		startService(new Intent(getBaseContext(), DateCheckService.class));
+	}
+	
+	private LocalDate getDate()
+	{
+		if (dbManager.getCurrentProjects() == null)
+		{
+			return null;
+		}
+		for(int i = 0; i < dbManager.getCurrentProjects().size(); i++)
+		{
+			for(int j = 0; j < dbManager.getTasks(dbManager.getProjectId(dbManager.getCompletedProjects().get(i))).size(); j++)
+			{
+				return dbManager.getTasks(dbManager.getProjectId(dbManager.getCompletedProjects().get(i))).get(j).getDeadline();
+			}
+		}
+		return null;
 	}
 	
 	public void goToNewProject(View view)
