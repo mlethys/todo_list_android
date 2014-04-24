@@ -1,29 +1,30 @@
 package pl.mlethys.todolist.view;
 
-import org.joda.time.LocalDate;
-
 import pl.mlethys.todolist.R;
-import pl.mlethys.todolist.model.DatabaseManager;
 import pl.mlethys.todolist.model.DateCheckService;
-import pl.mlethys.todolist.model.DeadlineChecker;
-import pl.mlethys.todolist.model.MySqliteHelper;
+import android.app.Dialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBarActivity;
+import android.text.method.LinkMovementMethod;
+import android.text.util.Linkify;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RadioButton;
+import android.widget.TextView;
 
 public class MainActivity extends ActionBarActivity
 {
-	private DatabaseManager dbManager;
-	private MySqliteHelper databaseHelper;
-
 	@Override
-	protected void onCreate(Bundle savedInstanceState) {
+	protected void onCreate(Bundle savedInstanceState) 
+	{
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 		
@@ -32,24 +33,13 @@ public class MainActivity extends ActionBarActivity
 			getSupportFragmentManager().beginTransaction()
 					.add(R.id.container, new PlaceholderFragment()).commit();
 		}
-//		DateCheckService service = new DateCheckService(getDate());
-//		startService(new Intent(getBaseContext(), DateCheckService.class));
+		startService(new Intent(this, DateCheckService.class));
 	}
 	
-	private LocalDate getDate()
+	@Override
+	public void onBackPressed()
 	{
-		if (dbManager.getCurrentProjects() == null)
-		{
-			return null;
-		}
-		for(int i = 0; i < dbManager.getCurrentProjects().size(); i++)
-		{
-			for(int j = 0; j < dbManager.getTasks(dbManager.getProjectId(dbManager.getCompletedProjects().get(i))).size(); j++)
-			{
-				return dbManager.getTasks(dbManager.getProjectId(dbManager.getCompletedProjects().get(i))).get(j).getDeadline();
-			}
-		}
-		return null;
+		this.finish();
 	}
 	
 	public void goToNewProject(View view)
@@ -85,11 +75,94 @@ public class MainActivity extends ActionBarActivity
 		int id = item.getItemId();
 		if (id == R.id.action_settings)
 		{
+			createSettingsDialog();
+			return true;
+		}
+		else if (id == R.id.action_about)
+		{
+			createAboutDialog();
 			return true;
 		}
 		return super.onOptionsItemSelected(item);
 	}
-
+	
+	private void createAboutDialog()
+	{
+		Dialog dialog = new Dialog(this);
+		dialog.setContentView(R.layout.about_dialog);
+		TextView link = (TextView) dialog.findViewById(R.id.link);
+		Linkify.addLinks(link, Linkify.ALL);
+		link.setMovementMethod(LinkMovementMethod.getInstance());
+		dialog.show();
+	}
+	
+	private void createSettingsDialog()
+	{
+		final Dialog dialog = new Dialog(this);
+		dialog.setContentView(R.layout.settings_dialog);
+		
+		RadioButton button1 = (RadioButton) dialog.findViewById(R.id.radio_option_1);
+		button1.setOnClickListener(new View.OnClickListener()
+		{		
+			@Override
+			public void onClick(View v) 
+			{
+				boolean checked = ((RadioButton) v).isChecked();
+				if(checked)
+				{
+					SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(MainActivity.this.getApplicationContext());
+					SharedPreferences.Editor editor = sharedPreferences.edit();
+					editor.putInt("option", 0);
+					editor.commit();
+					dialog.dismiss();
+					Log.d("preferences", "put 2");
+				}
+			}
+		});
+		
+		RadioButton button2 = (RadioButton) dialog.findViewById(R.id.radio_option_2);
+		button2.setOnClickListener(new View.OnClickListener()
+		{		
+			@Override
+			public void onClick(View v) 
+			{
+				boolean checked = ((RadioButton) v).isChecked();
+				if(checked)
+				{
+					SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(MainActivity.this.getApplicationContext());
+					SharedPreferences.Editor editor = sharedPreferences.edit();
+					editor.putInt("option", 1);
+					editor.commit();
+					dialog.dismiss();
+					Log.d("preferences", "put 1");
+				}
+			}
+		});
+		
+		RadioButton button3 = (RadioButton) dialog.findViewById(R.id.radio_option_3);
+		button3.setOnClickListener(new View.OnClickListener()
+		{		
+			@Override
+			public void onClick(View v) 
+			{
+				boolean checked = ((RadioButton) v).isChecked();
+				if(checked)
+				{
+					SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(MainActivity.this.getApplicationContext());
+					SharedPreferences.Editor editor = sharedPreferences.edit();
+					editor.putInt("option", 2);
+					editor.commit();
+					dialog.dismiss();
+					Log.d("preferences", "put 2");
+				}
+			}
+		});
+		
+		dialog.show();
+	}
+	
+	
+	
 	/**
 	 * A placeholder fragment containing a simple view.
 	 */

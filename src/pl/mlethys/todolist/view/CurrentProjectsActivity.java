@@ -1,18 +1,18 @@
 package pl.mlethys.todolist.view;
 
-import java.util.Hashtable;
 import java.util.LinkedList;
 import java.util.List;
-
-import org.joda.time.LocalDate;
 
 import pl.mlethys.todolist.R;
 import pl.mlethys.todolist.model.DatabaseManager;
 import pl.mlethys.todolist.model.DateCheckService;
+import pl.mlethys.todolist.model.DateCheckTask;
 import pl.mlethys.todolist.model.MySqliteHelper;
+import pl.mlethys.todolist.model.Task;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
@@ -42,22 +42,6 @@ public class CurrentProjectsActivity extends Activity implements OnItemClickList
 		arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, projectsList);
 		listView.setAdapter(arrayAdapter);
 		listView.setOnItemClickListener(this);
-		createNotification();
-	}
-	
-
-	private void createNotification()
-	{
-		for (int i = 0; i < projectsList.size(); i++)
-		{
-			for (int j = 0; j < dbManager.getTasks(dbManager.getProjectId(projectsList.get(i))).size(); j++)
-			{
-//				DateCheckService service = 
-//						new DateCheckService(dbManager.getTasks(dbManager.getProjectId(projectsList.get(i))).get(j).getDeadline(), 
-//											dbManager.getTasks(dbManager.getProjectId(projectsList.get(i))).get(j).getName());
-			}
-		}
-		startService(new Intent(getBaseContext(), DateCheckService.class));
 	}
 	
 	@Override

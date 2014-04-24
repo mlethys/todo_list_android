@@ -195,5 +195,6 @@
     
     <!-- custom -->
     <color name="CompletedProject">#E9E9E9</color>
+    <color name="background">#eaeaea</color>
 
 </resources>

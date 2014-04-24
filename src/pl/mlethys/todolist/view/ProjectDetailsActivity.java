@@ -8,9 +8,7 @@ import pl.mlethys.todolist.model.MySqliteHelper;
 import pl.mlethys.todolist.model.Task;
 import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.app.Dialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.graphics.drawable.Drawable;
@@ -46,6 +44,7 @@ public class ProjectDetailsActivity extends Activity
 	private LinearLayout titleLayout;
 	private TextView activityTitle;
 	
+	@SuppressWarnings("deprecation")
 	@SuppressLint("NewApi")
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
@@ -62,6 +61,7 @@ public class ProjectDetailsActivity extends Activity
 		
 		
 		LinearLayout mainLayout = new LinearLayout(this);
+		mainLayout.setBackgroundColor(getResources().getColor(R.color.background));
 		mainLayout.setGravity(Gravity.CENTER|Gravity.TOP);
 		mainLayout.setOrientation(LinearLayout.VERTICAL);	
 		
@@ -215,7 +215,8 @@ public class ProjectDetailsActivity extends Activity
 					}
 					else
 					{
-						tmpDate = new LocalDate(tmpDatePicker.getYear() + "-" + tmpDatePicker.getMonth() + "-" + tmpDatePicker.getDayOfMonth());
+						int month = tmpDatePicker.getMonth() + 1;
+						tmpDate = new LocalDate(tmpDatePicker.getYear() + "-" + month + "-" + tmpDatePicker.getDayOfMonth());
 						dbManager.add(taskNameEditText.getText().toString(), tmpDate, dbManager.getProjectId(title));
 						Log.d(LOG_TAG, "add task, not null date");
 					}

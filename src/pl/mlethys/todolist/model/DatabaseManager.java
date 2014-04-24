@@ -21,6 +21,7 @@ public class DatabaseManager
 	public DatabaseManager(MySqliteHelper databaseHelper)
 	{
 		this.databaseHelper = databaseHelper;
+		Log.d(LOG_TAG, "constructor called");
 	}
 	
 	public void add(String projectName)
@@ -195,6 +196,14 @@ public class DatabaseManager
 	{
 		Log.d(LOG_TAG, "completeTask is called");
 		String query = "update "+ databaseHelper.getTableProjectsName() + " set completed=1 where id=" + projectId + " and completed=0";
+		completeTasks(projectId);
+		database = databaseHelper.getWritableDatabase();
+		database.execSQL(query);
+		database.close();
+	}
+	private void completeTasks(int projectId)
+	{
+		String query = "update "+ databaseHelper.getTableTasksName() + " set completed=1 where project_id=" + projectId + " and completed=0";
 		database = databaseHelper.getWritableDatabase();
 		database.execSQL(query);
 		database.close();
@@ -231,6 +240,15 @@ public class DatabaseManager
 	{
 		Log.d(LOG_TAG, "deleteProject is called");	
 		String query = "delete from projects where id=" + projectId + " and completed=1";
+		deleteTasks(projectId);
+		database = databaseHelper.getWritableDatabase();
+		database.execSQL(query);
+		database.close();
+	}
+	
+	private void deleteTasks(int projectId)
+	{
+		String query = "delete from tasks where project_id=" + projectId;
 		database = databaseHelper.getWritableDatabase();
 		database.execSQL(query);
 		database.close();
@@ -254,4 +272,26 @@ public class DatabaseManager
 		return null;
 	}
 	
+	public List<LocalDate> getDeadlines()
+	{
+		List<LocalDate> deadlines = new LinkedList<LocalDate>();
+		
+		String query = "select * from " + databaseHelper.getTableTasksName() + " where completed=0";
+		
+		database = databaseHelper.getWritableDatabase();
+		Cursor cursor = database.rawQuery(query, null);
+		if(cursor.moveToFirst())
+		{
+			do
+			{
+				if(!cursor.isNull(2))
+				{
+					LocalDate date = new LocalDate(cursor.getString(2));
+					deadlines.add(date);
+				}
+					
+			}while(cursor.moveToNext());
+		}
+		return deadlines;
+	}	
 }
