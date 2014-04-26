@@ -4,49 +4,52 @@
     <string name="app_name">Todo List</string>
     
     <string name="title_text">Todo List</string>
-    <string name="action_settings">Ustawienia</string>
-    <string name="action_credits">O autorze</string>
+    <string name="action_settings">Settings</string>
+    <string name="action_credits">About</string>
     
-    <string name="add_button">Dodaj projekt</string>
-    <string name="current_button">Bieżące projekty</string>
-    <string name="completed_button">Zakończone projekty</string>
+    <string name="add_button">Add project</string>
+    <string name="current_button">Current projects</string>
+    <string name="completed_button">Completed projects</string>
     
-    <string name="new_project_title">Dodaj nowy projekt</string>
-    <string name="new_project_textfield_label">Nazwa projektu</string>
-    <string name="new_project_textfield_hint">Nazwa Twojego projektu</string>
-    <string name="new_project_add_button">Dodaj</string>
+    <string name="new_project_title">Add new project</string>
+    <string name="new_project_textfield_label">Project name</string>
+    <string name="new_project_textfield_hint">Name of your project</string>
+    <string name="new_project_add_button">Add</string>
     
-    <string name="current_projects_title">Bieżące projekty</string>
-    <string name="completed_projects_title">Zakończone projekty</string>
+    <string name="current_projects_title">Current projects</string>
+    <string name="completed_projects_title">CompletedProjects</string>
     
-    <string name="add_task_button">Dodaj</string>
+    <string name="add_task_button">Add</string>
     
     <string name="dialog_confirm_button">OK</string>
     
-    <string name="date_format_error_title">Błąd przetwarzania daty</string>
-    <string name="date_format_error_msg">Wystąpił błąd podczas przetwarzania daty</string>
+    <string name="date_format_error_title">Date processing error</string>
+    <string name="date_format_error_msg">An error has occurred during processing the date</string>
     
-    <string name="add_task_hint">Twoje zadanie</string>
-    <string name="added_task_message">Dodano nowe zadanie</string>
-    <string name="no_deadline">Brak</string>
-    <string name="deadline_hint">Trmin oddania zadania</string>
+    <string name="add_task_hint">Your task</string>
+    <string name="added_task_message">New task has been added</string>
+    <string name="no_deadline">None</string>
+    <string name="deadline_hint">Task deadline</string>
     
-    <string name="edit_project_title_hint">Nowy tytuł</string>
+    <string name="edit_project_title_hint">New title</string>
     
-    <string name="completed_project_msg">Zakończony</string>
-    <string name="delete_project">Chcesz usunąć?</string>
-    <string name="confirm_delete_button">Tak</string>
-    <string name="cancel_delete_button">Nie</string>
+    <string name="completed_project_msg">Completed</string>
+    <string name="delete_project">Delete project?</string>
+    <string name="confirm_delete_button">Yes</string>
+    <string name="cancel_delete_button">No</string>
     
-    <string name="notification_title">Zadanie do wykonania</string>
+    <string name="noti_fragment_1">Task deadline for </string>
+    <string name="alternative_noti">Task deadline today!</string>
+    <string name="noti_fragment_2"> days!</string>
 
-    <string name="credits_title">Autor: Michał Kabała</string>
-    <string name="credits_text">Dziękuje za korzystanie z mojego produktu.\n
-        						Oprogramowanie jest na licencji freeware.\n</string>
-    <string name="link"><a href="https://github.com/mlethys">Mój GitHub</a></string>
+    <string name="credits_title">Author: Michał Kabała</string>
+    <string name="credits_text">Thank you for using my product.\n
+        						The software is freeware.\n</string>
+    <string name="link"><a href="https://github.com/mlethys">My GitHub</a></string>
     
-    <string name="settings_title">Opcje przypomnienia:</string>
-    <string name="settings_option_1">Domyślne (w ten sam dzień)</string>
-    <string name="settings_option_2">Dzień przed</string>
-    <string name="settings_option_3">Tydzień przed</string>
+    <string name="settings_title">Reminder options:</string>
+    <string name="settings_option_1">Default (on the same day)</string>
+    <string name="settings_option_2">Day after</string>
+    <string name="settings_option_3">Week after</string>
+    <string name="settings_option_4">No reminder</string>
 </resources>

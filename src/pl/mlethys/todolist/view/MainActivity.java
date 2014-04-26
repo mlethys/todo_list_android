@@ -158,6 +158,25 @@ public class MainActivity extends ActionBarActivity
 			}
 		});
 		
+		RadioButton button4 = (RadioButton) dialog.findViewById(R.id.radio_option_4);
+		button4.setOnClickListener(new View.OnClickListener()
+		{		
+			@Override
+			public void onClick(View v) 
+			{
+				boolean checked = ((RadioButton) v).isChecked();
+				if(checked)
+				{
+					SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(MainActivity.this.getApplicationContext());
+					SharedPreferences.Editor editor = sharedPreferences.edit();
+					editor.putInt("option", 3);
+					editor.commit();
+					dialog.dismiss();
+					Log.d("preferences", "put 3");
+				}
+			}
+		});
+		
 		dialog.show();
 	}
 	

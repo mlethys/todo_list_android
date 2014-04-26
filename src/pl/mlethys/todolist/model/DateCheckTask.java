@@ -5,9 +5,12 @@ import java.util.TimerTask;
 import org.joda.time.LocalDate;
 
 import pl.mlethys.todolist.R;
+import pl.mlethys.todolist.view.ProjectDetailsActivity;
 import android.app.Notification;
 import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import android.support.v4.app.NotificationCompat;
@@ -15,11 +18,8 @@ import android.util.Log;
 
 public class DateCheckTask extends TimerTask
 {
-//	private LocalDate deadline;
 	private Context context;
 	private boolean firstCall = false;
-//	private String taskName;
-//	private int choice;
 	private final int DEFAULT = 0;
 	private final int DAY_REMIND = 1;
 	private final int WEEK_REMIND = 2;
@@ -32,54 +32,52 @@ public class DateCheckTask extends TimerTask
 	{
 		super();
 		this.context = context;
-		//this.deadline = task.getDeadline();
-		//this.taskName = task.getName();
-		//choice = 0;
 	}
 	
-	private void checkDate(int choice, LocalDate deadline)
+	private void checkDate(int choice, Task task)
 	{
 		switch(choice)
 		{
 			case DEFAULT:
-				if(deadline.equals(LocalDate.now()))
+				if(task.getDeadline().equals(LocalDate.now()))
 				{
+					
 					NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
-					notificationManager.notify(0, createNotification());
+					notificationManager.notify(0, createNotification(task.getName()));
 					Log.d("notification", "notification id 0");
 				}
 				break;
 			case DAY_REMIND:
-				if(deadline.equals(LocalDate.now().plusDays(1)))
+				if(task.getDeadline().equals(LocalDate.now().plusDays(1)))
 				{
 					NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
-					notificationManager.notify(1, createNotification(1));
+					notificationManager.notify(1, createNotification(1, task.getName()));
 					Log.d("notification", "notification id 1");
 				}
-				else if(deadline.equals(LocalDate.now()))
+				else if(task.getDeadline().equals(LocalDate.now()))
 				{
 					NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
-					notificationManager.notify(0, createNotification());
+					notificationManager.notify(0, createNotification(task.getName()));
 					Log.d("notification", "notification id 0");
 				}
 				break;
 			case WEEK_REMIND:
-				if(deadline.equals(LocalDate.now().plusDays(7)))
+				if(task.getDeadline().equals(LocalDate.now().plusDays(7)))
 				{
 					NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
-					notificationManager.notify(2, createNotification(7));
+					notificationManager.notify(2, createNotification(7, task.getName()));
 					Log.d("notification", "notification id 2");
 				}
-				else if(deadline.equals(LocalDate.now().plusDays(1)))
+				else if(task.getDeadline().equals(LocalDate.now().plusDays(1)))
 				{
 					NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
-					notificationManager.notify(1, createNotification(1));
+					notificationManager.notify(1, createNotification(1, task.getName()));
 					Log.d("notification", "notification id 1");
 				}
-				else if(deadline.equals(LocalDate.now()))
+				else if(task.getDeadline().equals(LocalDate.now()))
 				{
 					NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
-					notificationManager.notify(0, createNotification());
+					notificationManager.notify(0, createNotification(task.getName()));
 					Log.d("notification", "notification id 0");
 				}
 				break;
@@ -89,32 +87,43 @@ public class DateCheckTask extends TimerTask
 		}
 	}
 	
-	private Notification createNotification(int daysToDeadline)
+	private Notification createNotification(int daysToDeadline, String taskName)
 	{
+		String notiPart1 = context.getResources().getString(R.string.noti_fragment_1);
+		String notiPart2 = context.getResources().getString(R.string.noti_fragment_2);
+		
+		Intent intent = new Intent(context, ProjectDetailsActivity.class).putExtra("title", dbManager.getProjectNameFromTask(dbManager.getTaskId(taskName)));
+		intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+		PendingIntent pintent = PendingIntent.getActivity(context, 0, intent, 0);
+		
 		Notification notification = new NotificationCompat.Builder(context)
-																.setContentTitle("Todo zadanie")
-																.setContentText("Termin zadania" + " za " + daysToDeadline + " dni!")
+																.setContentTitle(taskName)
+																.setContentText(notiPart1 + daysToDeadline + notiPart2)
 																.setSmallIcon(R.drawable.ic_launcher)
 																.setAutoCancel(true)
+																.setContentIntent(pintent)
 																.build();
 		notification.defaults |= Notification.DEFAULT_SOUND;
-		notification.flags |= Notification.FLAG_AUTO_CANCEL;
 		
-		return notification;
-		
-		
+		return notification;		
 	}
 	
-	private Notification createNotification()
+	private Notification createNotification(String taskName)
 	{
+		String noti = context.getResources().getString(R.string.alternative_noti);
+		
+		Intent intent = new Intent(context, ProjectDetailsActivity.class).putExtra("title", dbManager.getProjectNameFromTask(dbManager.getTaskId(taskName)));
+		intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+		PendingIntent pintent = PendingIntent.getActivity(context, 0, intent, 0);
+		
 		Notification notification = new NotificationCompat.Builder(context)
-																.setContentTitle("Todo zadanie")
-																.setContentText("Termin zadania" + " ju¿ dzisiaj!")
+																.setContentTitle(taskName)
+																.setContentText(noti)
 																.setSmallIcon(R.drawable.ic_launcher)
 																.setAutoCancel(true)
+																.setContentIntent(pintent)
 																.build();
 		notification.defaults |= Notification.DEFAULT_SOUND;
-		notification.flags |= Notification.FLAG_AUTO_CANCEL;
 		
 		return notification;
 	}
@@ -133,10 +142,11 @@ public class DateCheckTask extends TimerTask
 	
 	private void checkDateAndCreateNotification()
 	{
-		for(LocalDate deadline : dbManager.getDeadlines())
+		for(Task task : dbManager.getDeadlineTasks())
 		{
-			checkDate(getPreferences(), deadline);
+			checkDate(getPreferences(), task);
 		}
+		
 	}
 	
 	private int getPreferences()

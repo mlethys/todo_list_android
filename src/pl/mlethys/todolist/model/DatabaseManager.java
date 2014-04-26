@@ -292,6 +292,52 @@ public class DatabaseManager
 					
 			}while(cursor.moveToNext());
 		}
+		database.close();
+		
 		return deadlines;
-	}	
+	}
+	
+	public List<Task> getDeadlineTasks()
+	{
+		List<Task> tasks = new LinkedList<Task>();
+		
+		String query = "select * from " + databaseHelper.getTableTasksName() + " where completed=0";
+		
+		database = databaseHelper.getWritableDatabase();
+		Cursor cursor = database.rawQuery(query, null);
+		
+		if(cursor.moveToFirst())
+		{
+			do
+			{
+				if(!cursor.isNull(2))
+				{
+					Task task = new Task(cursor.getString(1), new LocalDate(cursor.getString(2)));
+					tasks.add(task);
+				}
+			}while(cursor.moveToNext());
+		}
+		database.close();
+		
+		return tasks;
+	}
+	
+	public String getProjectNameFromTask(int taskId)
+	{
+		String query = "select * from projects inner join tasks on projects.id=tasks.project_id where tasks.id=" + taskId; 
+		
+		database = databaseHelper.getWritableDatabase();
+		Cursor cursor = database.rawQuery(query, null);
+		
+		if(cursor.moveToFirst())
+		{
+			do
+			{
+				return cursor.getString(1);
+			}while(cursor.moveToNext());
+		}
+		database.close();
+		return "";
+	}
+	
 }

@@ -5,14 +5,10 @@ import java.util.List;
 
 import pl.mlethys.todolist.R;
 import pl.mlethys.todolist.model.DatabaseManager;
-import pl.mlethys.todolist.model.DateCheckService;
-import pl.mlethys.todolist.model.DateCheckTask;
 import pl.mlethys.todolist.model.MySqliteHelper;
-import pl.mlethys.todolist.model.Task;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;

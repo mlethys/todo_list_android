@@ -44,7 +44,6 @@ public class ProjectDetailsActivity extends Activity
 	private LinearLayout titleLayout;
 	private TextView activityTitle;
 	
-	@SuppressWarnings("deprecation")
 	@SuppressLint("NewApi")
 	@Override
 	protected void onCreate(Bundle savedInstanceState)

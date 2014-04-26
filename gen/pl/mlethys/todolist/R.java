@@ -1203,7 +1203,7 @@ containing a value of this type.
         public static final int ic_launcher=0x7f02005b;
     }
     public static final class id {
-        public static final int action_about=0x7f05005b;
+        public static final int action_about=0x7f05005c;
         public static final int action_bar=0x7f05001c;
         public static final int action_bar_activity_content=0x7f050015;
         public static final int action_bar_container=0x7f05001b;
@@ -1215,7 +1215,7 @@ containing a value of this type.
         public static final int action_menu_divider=0x7f050016;
         public static final int action_menu_presenter=0x7f050017;
         public static final int action_mode_close_button=0x7f050024;
-        public static final int action_settings=0x7f05005a;
+        public static final int action_settings=0x7f05005b;
         public static final int activity_chooser_view_content=0x7f050025;
         public static final int add_project_button=0x7f050040;
         public static final int always=0x7f05000b;
@@ -1271,6 +1271,7 @@ containing a value of this type.
         public static final int radio_option_1=0x7f050057;
         public static final int radio_option_2=0x7f050058;
         public static final int radio_option_3=0x7f050059;
+        public static final int radio_option_4=0x7f05005a;
         public static final int search_badge=0x7f050032;
         public static final int search_bar=0x7f050031;
         public static final int search_button=0x7f050033;
@@ -1407,14 +1408,15 @@ containing a value of this type.
         public static final int add_task_button=0x7f0a001a;
         public static final int add_task_hint=0x7f0a001e;
         public static final int added_task_message=0x7f0a001f;
+        public static final int alternative_noti=0x7f0a0028;
         public static final int app_name=0x7f0a000d;
         public static final int cancel_delete_button=0x7f0a0026;
         public static final int completed_button=0x7f0a0013;
         public static final int completed_project_msg=0x7f0a0023;
         public static final int completed_projects_title=0x7f0a0019;
         public static final int confirm_delete_button=0x7f0a0025;
-        public static final int credits_text=0x7f0a0029;
-        public static final int credits_title=0x7f0a0028;
+        public static final int credits_text=0x7f0a002b;
+        public static final int credits_title=0x7f0a002a;
         public static final int current_button=0x7f0a0012;
         public static final int current_projects_title=0x7f0a0018;
         public static final int date_format_error_msg=0x7f0a001d;
@@ -1423,17 +1425,19 @@ containing a value of this type.
         public static final int delete_project=0x7f0a0024;
         public static final int dialog_confirm_button=0x7f0a001b;
         public static final int edit_project_title_hint=0x7f0a0022;
-        public static final int link=0x7f0a002a;
+        public static final int link=0x7f0a002c;
         public static final int new_project_add_button=0x7f0a0017;
         public static final int new_project_textfield_hint=0x7f0a0016;
         public static final int new_project_textfield_label=0x7f0a0015;
         public static final int new_project_title=0x7f0a0014;
         public static final int no_deadline=0x7f0a0020;
-        public static final int notification_title=0x7f0a0027;
-        public static final int settings_option_1=0x7f0a002c;
-        public static final int settings_option_2=0x7f0a002d;
-        public static final int settings_option_3=0x7f0a002e;
-        public static final int settings_title=0x7f0a002b;
+        public static final int noti_fragment_1=0x7f0a0027;
+        public static final int noti_fragment_2=0x7f0a0029;
+        public static final int settings_option_1=0x7f0a002e;
+        public static final int settings_option_2=0x7f0a002f;
+        public static final int settings_option_3=0x7f0a0030;
+        public static final int settings_option_4=0x7f0a0031;
+        public static final int settings_title=0x7f0a002d;
         public static final int title_text=0x7f0a000e;
     }
     public static final class style {
