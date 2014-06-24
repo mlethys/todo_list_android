@@ -8,5 +8,9 @@
 	<classpathentry kind="lib" path="libs/joda-time-2.3.jar"/>
 	<classpathentry kind="lib" path="libs/joda-time-2.3-sources.jar"/>
 	<classpathentry kind="lib" path="libs/joda-time-2.3-javadoc.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
+	<classpathentry kind="src" path="/appcompat_v7_2"/>
+	<classpathentry kind="lib" path="libs/androidplot-core-0.6.2-SNAPSHOT-sources.jar"/>
+	<classpathentry kind="lib" path="libs/androidplot-core-0.6.2-SNAPSHOT.jar"/>
 	<classpathentry kind="output" path="bin/classes"/>
 </classpath>

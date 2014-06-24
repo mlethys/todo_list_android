@@ -59,6 +59,12 @@ public class MainActivity extends ActionBarActivity
 		Intent completedProjectsIntent = new Intent(MainActivity.this, CompletedProjectsActivity.class);
 		startActivity(completedProjectsIntent);
 	}
+	
+	public void goToProductivity()
+	{
+		Intent productivityIntent = new Intent(MainActivity.this, ProductivityActivity.class);
+		startActivity(productivityIntent);
+	}
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) 
@@ -83,6 +89,11 @@ public class MainActivity extends ActionBarActivity
 			createAboutDialog();
 			return true;
 		}
+		else if (id == R.id.action_productivity)
+		{
+			goToProductivity();
+			return true;
+		}
 		return super.onOptionsItemSelected(item);
 	}
 	
@@ -101,6 +112,9 @@ public class MainActivity extends ActionBarActivity
 		final Dialog dialog = new Dialog(this);
 		dialog.setContentView(R.layout.settings_dialog);
 		
+		SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(MainActivity.this.getApplicationContext());
+		final SharedPreferences.Editor editor = sharedPreferences.edit();
+		
 		RadioButton button1 = (RadioButton) dialog.findViewById(R.id.radio_option_1);
 		button1.setOnClickListener(new View.OnClickListener()
 		{		
@@ -110,8 +124,7 @@ public class MainActivity extends ActionBarActivity
 				boolean checked = ((RadioButton) v).isChecked();
 				if(checked)
 				{
-					SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(MainActivity.this.getApplicationContext());
-					SharedPreferences.Editor editor = sharedPreferences.edit();
+					
 					editor.putInt("option", 0);
 					editor.commit();
 					dialog.dismiss();
@@ -129,8 +142,6 @@ public class MainActivity extends ActionBarActivity
 				boolean checked = ((RadioButton) v).isChecked();
 				if(checked)
 				{
-					SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(MainActivity.this.getApplicationContext());
-					SharedPreferences.Editor editor = sharedPreferences.edit();
 					editor.putInt("option", 1);
 					editor.commit();
 					dialog.dismiss();
@@ -148,8 +159,6 @@ public class MainActivity extends ActionBarActivity
 				boolean checked = ((RadioButton) v).isChecked();
 				if(checked)
 				{
-					SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(MainActivity.this.getApplicationContext());
-					SharedPreferences.Editor editor = sharedPreferences.edit();
 					editor.putInt("option", 2);
 					editor.commit();
 					dialog.dismiss();
@@ -167,8 +176,6 @@ public class MainActivity extends ActionBarActivity
 				boolean checked = ((RadioButton) v).isChecked();
 				if(checked)
 				{
-					SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(MainActivity.this.getApplicationContext());
-					SharedPreferences.Editor editor = sharedPreferences.edit();
 					editor.putInt("option", 3);
 					editor.commit();
 					dialog.dismiss();
@@ -176,6 +183,22 @@ public class MainActivity extends ActionBarActivity
 				}
 			}
 		});
+		
+		switch(sharedPreferences.getInt("option", 0))
+		{
+			case 0:
+				button1.setChecked(true);
+				break;
+			case 1:
+				button2.setChecked(true);
+				break;
+			case 2:
+				button3.setChecked(true);
+				break;
+			case 3:
+				button4.setChecked(true);
+				break;
+		}
 		
 		dialog.show();
 	}

@@ -40,7 +40,6 @@ public class CompletedProjectsActivity extends Activity implements OnItemClickLi
 		arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, projectsList);
 		listView.setAdapter(arrayAdapter);
 		listView.setOnItemClickListener(this);
-	
 	}
 	
 	@Override
@@ -53,6 +52,7 @@ public class CompletedProjectsActivity extends Activity implements OnItemClickLi
 	{
 		dialog = new Dialog(this);
 		dialog.setContentView(R.layout.delete_dialog);
+		dialog.setTitle(R.string.delete_project);
 		dialog.show();
 		
 		Button yesButton = (Button) dialog.findViewById(R.id.confirm_delete_button);

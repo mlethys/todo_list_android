@@ -8,6 +8,7 @@
     <string name="title_text">Todo List</string>
     <string name="action_settings">Settings</string>
     <string name="action_credits">About</string>
+    <string name="action_productivity">Productivity</string>
     
     <string name="add_button">Add project</string>
     <string name="current_button">Current projects</string>
@@ -40,9 +41,10 @@
     <string name="confirm_delete_button">Yes</string>
     <string name="cancel_delete_button">No</string>
     
-    <string name="noti_fragment_1">Task deadline for </string>
+    <string name="noti_fragment_1">"Task deadline for "</string>
     <string name="alternative_noti">Task deadline today!</string>
-    <string name="noti_fragment_2"> days!</string>
+    <string name="noti_fragment_2">" days!"</string>
+    <string name="noti_fragment_overdue">Task overdue!</string>
 
     <string name="credits_title">Author: Michał Kabała</string>
     <string name="credits_text">Thank you for using my product.\n
@@ -54,4 +56,8 @@
     <string name="settings_option_2">Day after</string>
     <string name="settings_option_3">Week after</string>
     <string name="settings_option_4">No reminder</string>
+    
+    <string name="productivity_title">Your productivity</string>
+    <string name="plot_title">Productivity</string>
+    
 </resources>

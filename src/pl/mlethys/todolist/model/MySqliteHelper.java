@@ -11,6 +11,7 @@ public class MySqliteHelper extends SQLiteOpenHelper
 	
 	private final String TABLE_PROJECTS = "projects";
 	private final String TABLE_TASKS = "tasks";
+	private final String TABLE_POINTS = "points";
 	
 	private final static String DATABASE_NAME = "projects.db";
 	private final static int DATABASE_VERSION = 1;
@@ -29,6 +30,10 @@ public class MySqliteHelper extends SQLiteOpenHelper
 	{
 		return TABLE_TASKS;
 	}
+	public String getTablePointsName()
+	{
+		return TABLE_POINTS;
+	}
 
 	@Override
 	public void onCreate(SQLiteDatabase database) 
@@ -39,13 +44,19 @@ public class MySqliteHelper extends SQLiteOpenHelper
 									+ "deadline date, "
 									+ "completed integer default 0, "
 									+ "project_id integer, "
-									+ "foreign key (project_id) references " + TABLE_PROJECTS + "(id))";
+									+ "foreign key (project_id) references " 
+									+ TABLE_PROJECTS + "(id))";
 		String createTableProjects = "create table " + TABLE_PROJECTS 
 									+ "(id integer primary key autoincrement, "
 									+ "name varchar(250) not null, "
 									+ "completed integer default 0)";
+		String createTablePoints = "create table " + TABLE_POINTS
+									+ "(id integer primary key autoincrement, "
+									+ "points integer not null, "
+									+ "date date not null)";
 		database.execSQL(createTableTasks);
 		database.execSQL(createTableProjects);
+		database.execSQL(createTablePoints);
 		Log.d(LOG_TAG, "onCreate database created");
 		
 	}
@@ -56,6 +67,8 @@ public class MySqliteHelper extends SQLiteOpenHelper
 		String dropQuery = "drop table if exists " + TABLE_PROJECTS;
 		database.execSQL(dropQuery);
 		dropQuery = "drop table if exists " + TABLE_TASKS;
+		database.execSQL(dropQuery);
+		dropQuery = "drop table if exists " + TABLE_POINTS;
 		database.execSQL(dropQuery);
 		Log.d(LOG_TAG, "onUpgrade, tables dropped");
 		

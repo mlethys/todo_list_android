@@ -51,6 +51,7 @@ public class CurrentProjectsActivity extends Activity implements OnItemClickList
 	public void onBackPressed()
 	{
 		Intent mainMenuIntent = new Intent(CurrentProjectsActivity.this, MainActivity.class);
+		finish();
 		startActivity(mainMenuIntent);
 	}
 }

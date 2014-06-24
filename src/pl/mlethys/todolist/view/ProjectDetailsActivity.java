@@ -122,6 +122,7 @@ public class ProjectDetailsActivity extends Activity
 		activityTitle = new TextView(this);
 		activityTitle.append(title);
 		activityTitle.setTextSize(30f);
+		activityTitle.setGravity(Gravity.CENTER);
 		activityTitle.setMaxWidth(350);
 		activityTitle.setOnLongClickListener(new View.OnLongClickListener() 
 		{
@@ -284,7 +285,8 @@ public class ProjectDetailsActivity extends Activity
 				@Override
 				public void onClick(View v) 
 				{
-					dbManager.completeTask(dbManager.getTaskId(task.getName()));
+					dbManager.completeTask(dbManager.getTaskId(task.getName(), 
+												dbManager.getProjectId(title)));
 					finish();
 					startActivity(getIntent());
 				}

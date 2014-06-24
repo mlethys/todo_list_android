@@ -43,7 +43,8 @@ public class DateCheckTask extends TimerTask
 				{
 					
 					NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
-					notificationManager.notify(0, createNotification(task.getName()));
+					String noti = context.getResources().getString(R.string.alternative_noti);
+					notificationManager.notify(0, createNotification(task.getName(), noti));
 					Log.d("notification", "notification id 0");
 				}
 				break;
@@ -57,7 +58,8 @@ public class DateCheckTask extends TimerTask
 				else if(task.getDeadline().equals(LocalDate.now()))
 				{
 					NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
-					notificationManager.notify(0, createNotification(task.getName()));
+					String noti = context.getResources().getString(R.string.alternative_noti);
+					notificationManager.notify(0, createNotification(task.getName(), noti));
 					Log.d("notification", "notification id 0");
 				}
 				break;
@@ -77,13 +79,21 @@ public class DateCheckTask extends TimerTask
 				else if(task.getDeadline().equals(LocalDate.now()))
 				{
 					NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
-					notificationManager.notify(0, createNotification(task.getName()));
+					String noti = context.getResources().getString(R.string.alternative_noti);
+					notificationManager.notify(0, createNotification(task.getName(), noti));
 					Log.d("notification", "notification id 0");
 				}
 				break;
 			case NO_REMIND:
 				//do noting
 				break;
+		}
+		
+		if(task.getDeadline().isBefore(LocalDate.now()))
+		{
+			NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
+			String noti = context.getResources().getString(R.string.noti_fragment_overdue);
+			notificationManager.notify(0, createNotification(task.getName(), noti));
 		}
 	}
 	
@@ -108,9 +118,9 @@ public class DateCheckTask extends TimerTask
 		return notification;		
 	}
 	
-	private Notification createNotification(String taskName)
+	private Notification createNotification(String taskName, String noti)
 	{
-		String noti = context.getResources().getString(R.string.alternative_noti);
+		
 		
 		Intent intent = new Intent(context, ProjectDetailsActivity.class).putExtra("title", dbManager.getProjectNameFromTask(dbManager.getTaskId(taskName)));
 		intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);

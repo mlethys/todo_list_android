@@ -6,6 +6,7 @@
     <string name="title_text">Todo List</string>
     <string name="action_settings">Ustawienia</string>
     <string name="action_credits">O autorze</string>
+    <string name="action_productivity">Produktywność</string>
     
     <string name="add_button">Dodaj projekt</string>
     <string name="current_button">Bieżące projekty</string>
@@ -38,9 +39,10 @@
     <string name="confirm_delete_button">Tak</string>
     <string name="cancel_delete_button">Nie</string>
     
-    <string name="noti_fragment_1">Termin zadania za </string>
-    <string name="alternative_noti"> Termin zadania już dzisiaj!</string>
-    <string name="noti_fragment_2"> dni!</string>
+    <string name="noti_fragment_1">""Termin zadania za "</string>
+    <string name="alternative_noti">Termin zadania już dzisiaj!</string>
+    <string name="noti_fragment_2">" dni!"</string>
+    <string name="noti_fragment_overdue">Zaległe zadanie!</string>
 
     <string name="credits_title">Autor: Michał Kabała</string>
     <string name="credits_text">Dziękuje za korzystanie z mojego produktu.\n
@@ -52,4 +54,10 @@
     <string name="settings_option_2">Dzień przed</string>
     <string name="settings_option_3">Tydzień przed</string>
     <string name="settings_option_4">Bez przypomnienia</string>
+    
+    <string name="widget_hint">Nazwa projektu</string>
+    <string name="widget_button_add_text">Dodaj</string>
+    
+    <string name="productivity_title">Twoja produktywność</string>
+    <string name="plot_title">Produktywność</string>
 </resources>

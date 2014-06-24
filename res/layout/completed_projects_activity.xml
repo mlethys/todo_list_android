@@ -6,7 +6,7 @@
     android:layout_height="fill_parent"
     android:orientation="vertical"
     android:background="@drawable/background3"
-    tools:context="pl.mlethys.todolist.view.CcompletedtProjectsActivity"
+    tools:context="pl.mlethys.todolist.view.CompletedtProjectsActivity"
     tools:ignore="MergeRootFrame" >
     <TextView 
 	    android:id="@+id/completed_projects_title"
